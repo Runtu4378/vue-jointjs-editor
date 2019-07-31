@@ -131,8 +131,20 @@ export const StartEndModel = Model.extend(extend(
       },
     }, Model.prototype.defaults),
 
-    initialize: function (t) {
+    initialize: function (title) {
       Model.prototype.initialize.apply(this, arguments)
+      this.on('change:title', function (node, title) {
+        node.attr('.title/text', title)
+        if (title === 'START') {
+          // 针对起点类型端点的配置
+        } else {
+          // 终点端点配置
+        }
+      })
+      this.set({
+        title: title,
+        name: '',
+      })
     },
   }
 ))

@@ -41,28 +41,20 @@ export default class Editor {
 
   /** 初始化起点终点 */
   initStartAndEnd () {
-    const startNode = new joint.shapes.cmChart.StartEnd({
-      attrs: {
-        'text.title': {
-          text: 'START',
-        },
-      },
-    })
+    const startNode = new joint.shapes.cmChart.StartEnd('START')
     startNode.position(
       props.gridSize * 3,
       props.gridSize * 6,
     )
-    // console.log(startNode)
-    // const view = this.paper.findViewByModel(joint.shapes.cmChart.StartEnd);
-    // startNode.set({
-    //   id: startNode.id,
-    //   outPorts: ['out'],
-    // });
     startNode.set('outPorts', ['out'])
-    // startNode.resize(100, 40);
     this.graph.addCell(startNode)
-    // const view = this.paper.findViewByModel(startNode);
-    // const view = this.paper.findViewByModel(joint.shapes.cmChart.StartEnd)
-    // console.log(view)
+
+    const endNode = new joint.shapes.cmChart.StartEnd('END')
+    endNode.position(
+      props.gridSize * 3,
+      props.gridSize * 12,
+    )
+    endNode.set('inPorts', ['in'])
+    this.graph.addCell(endNode)
   }
 }
