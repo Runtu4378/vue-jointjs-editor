@@ -92,7 +92,7 @@ export const StartEndModel = Model.extend(extend(
           alignmentBaseline: 'central',
         },
         'g.error image': {
-          xlinkHref: `${props.imgPrefix}/icon_warn.png`,
+          xlinkHref: `${props.imgPrefix}/block_icon_error.svg`,
           ref: '.background',
           refX: 54,
           refY: bottomIconY,
@@ -100,7 +100,7 @@ export const StartEndModel = Model.extend(extend(
           height: 16,
         },
         'g.icon image': {
-          xlinkHref: `${props.imgPrefix}/icon_task.png`,
+          xlinkHref: '',
           ref: '.background',
           refX: 12,
           refY: 8,
@@ -108,7 +108,7 @@ export const StartEndModel = Model.extend(extend(
           height: iconHeight,
         },
         'g.code image': {
-          xlinkHref: `${props.imgPrefix}/icon_compile.png`,
+          xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_off.svg`,
           ref: '.background',
           refX: 12,
           refY: bottomIconY,
@@ -137,8 +137,36 @@ export const StartEndModel = Model.extend(extend(
         node.attr('.title/text', title)
         if (title === 'START') {
           // 针对起点类型端点的配置
+          node.attr({
+            'g.icon image': {
+              xlinkHref: `${props.imgPrefix}/block_icon_start.svg`,
+              // refX: 13,
+            },
+          })
         } else {
           // 终点端点配置
+          node.attr({
+            'g.icon image': {
+              xlinkHref: `${props.imgPrefix}/block_icon_end.svg`,
+              // refX: 13,
+            },
+          })
+        }
+      })
+      this.on('change:custom_code', function (node, code) {
+        if (code === '') {
+          node.attr({
+            'g.code image': {
+              xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_off.svg`,
+            },
+          })
+        } else {
+          node.attr({
+            'g.code image': {
+              xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_on.svg`,
+            },
+          })
+          this.set('warn', false)
         }
       })
       this.set({

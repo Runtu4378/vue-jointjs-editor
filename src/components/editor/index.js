@@ -2,6 +2,9 @@
 
 import * as joint from 'jointjs'
 import 'jointjs/dist/joint.css'
+import {
+  defaults,
+} from 'lodash'
 
 import props from './props.js'
 import nodeDefine from './nodes/index.js'
@@ -33,9 +36,71 @@ export default class Editor {
       model: this.graph,
       width: '100%',
       height: '100%',
+      multiLinks: false,
+      perpendicularLinks: true,
+      snapLinks: {
+        radius: 50,
+      },
+      drawGrid: true,
       gridSize: props.gridSize,
-      drawGrid: 'dot',
+      clickThreshold: 10,
       cellViewNamespace: joint.shapes,
+
+      linkView: joint.dia.LinkView.extend({
+        options: defaults({
+          doubleLinkTools: true,
+          doubleLinkToolsOffset: 40,
+        }, joint.dia.LinkView.prototype.options),
+      }),
+      defaultLink: new joint.dia.Link({
+        connector: {
+          name: 'rounded',
+          args: {
+            radius: 5,
+          },
+        },
+        router: {
+          name: 'metro',
+        },
+        startDirections: ['right'],
+        endDirections: ['left'],
+        attrs: {
+          '.marker-target': {
+            d: 'M 10 0 L 0 5 L 10 10 z',
+            fill: '#818D99',
+            stroke: '#818D99',
+          },
+          '.connection': {
+            stroke: '#818D99',
+            strokeWidth: 2,
+          },
+        },
+      }),
+      interactive: function (target) {
+        return target.model instanceof joint.dia.Link ? {
+          vertexAdd: false,
+        } : true
+      },
+      // 校验连接是否成立
+      validateConnection: function (cellViewS, magnetS, cellViewT, magnetT) {
+        return cellViewT.model.get('type') === 'link'
+          ? false
+          : (magnetS && magnetS.getAttribute('type') === 'input')
+            ? false
+            : (magnetT && magnetT.getAttribute('type') === 'output')
+              ? false
+              : cellViewS === cellViewT
+                ? false
+                : (
+                  cellViewT.model.get('type') === `${props.prefix}.StartEnd` &&
+                  cellViewS.model.get('type') === `${props.prefix}.StartEnd`
+                )
+                  ? false
+                  : magnetS != magnetT
+      },
+      validateMagnet: function (t, e) {
+        return e.getAttribute('type') !== 'input'
+      },
     })
   }
 

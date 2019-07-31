@@ -6,6 +6,9 @@ export default {
   /** 组件前缀 */
   prefix: 'cmChart',
 
+  /** 主题 */
+  theme: 'light',
+
   /** 图片前缀 */
   imgPrefix: '/joi/img',
 
