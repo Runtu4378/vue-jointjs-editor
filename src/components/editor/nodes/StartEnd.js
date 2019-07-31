@@ -1,4 +1,5 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals PLAYBOOK_THEME */
 
 // import * as joint from 'jointjs'
 import {
@@ -108,7 +109,7 @@ export const StartEndModel = Model.extend(extend(
           height: iconHeight,
         },
         'g.code image': {
-          xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_off.svg`,
+          xlinkHref: `${props.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_off.svg`,
           ref: '.background',
           refX: 12,
           refY: bottomIconY,
@@ -157,13 +158,13 @@ export const StartEndModel = Model.extend(extend(
         if (code === '') {
           node.attr({
             'g.code image': {
-              xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_off.svg`,
+              xlinkHref: `${props.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_off.svg`,
             },
           })
         } else {
           node.attr({
             'g.code image': {
-              xlinkHref: `${props.imgPrefix}/block_icon_code_${props.theme}_on.svg`,
+              xlinkHref: `${props.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_on.svg`,
             },
           })
           this.set('warn', false)

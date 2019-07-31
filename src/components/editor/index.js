@@ -19,13 +19,16 @@ export default class Editor {
 
   constructor ({
     id,
+    theme = 'light',
     value,
   }) {
     this.id = id
     this.initInstance()
+    this.initTheme(theme)
     nodeDefine()
-    this.initStartAndEnd()
     console.log(joint.shapes)
+    this.initStartAndEnd()
+    this.initOtherExample()
   }
 
   /** 初始化joint实例 */
@@ -104,6 +107,11 @@ export default class Editor {
     })
   }
 
+  /** 初始化主题配置 */
+  initTheme (theme) {
+    window.PLAYBOOK_THEME = theme
+  }
+
   /** 初始化起点终点 */
   initStartAndEnd () {
     const startNode = new joint.shapes.cmChart.StartEnd('START')
@@ -121,5 +129,15 @@ export default class Editor {
     )
     endNode.set('inPorts', ['in'])
     this.graph.addCell(endNode)
+  }
+
+  /** 插入其他示例节点 */
+  initOtherExample () {
+    const actionNode = new joint.shapes.cmChart.Action()
+    actionNode.position(
+      props.gridSize * 12,
+      props.gridSize * 6,
+    )
+    this.graph.addCell(actionNode)
   }
 }

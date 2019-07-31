@@ -1,13 +1,12 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
+window.PLAYBOOK_THEME = 'light'
+
 export default {
   /** 栅格大小 */
   gridSize: 20,
   /** 组件前缀 */
   prefix: 'cmChart',
-
-  /** 主题 */
-  theme: 'light',
 
   /** 图片前缀 */
   imgPrefix: '/joi/img',
