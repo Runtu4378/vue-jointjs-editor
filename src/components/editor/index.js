@@ -46,9 +46,6 @@ export default class Editor {
         'text.title': {
           text: 'START',
         },
-        '.outPorts circle': {
-          fill: '#51B252',
-        },
       },
     })
     startNode.position(

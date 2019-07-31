@@ -14,4 +14,7 @@ export default {
   headerIconPadding: 12,
   headerFontSize: 12,
   headerBgColor: '#161B1E',
+
+  /** 端点配置 */
+  portBgColor: '#51B252',
 }
