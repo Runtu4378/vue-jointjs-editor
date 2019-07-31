@@ -6,6 +6,9 @@ export default {
   /** 组件前缀 */
   prefix: 'cmChart',
 
+  /** 图片前缀 */
+  imgPrefix: '/joi/img',
+
   /** header相关设置 */
   headerHeight: 28,
   headerIconPadding: 12,

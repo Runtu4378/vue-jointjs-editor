@@ -14,6 +14,8 @@ import {
 
 const startWidth = props.gridSize * 4
 const startHeight = props.gridSize * 3
+const iconHeight = 13
+const bottomIconY = startHeight - 17 - 10
 
 export const StartEndModel = Model.extend(extend(
   {},
@@ -50,6 +52,7 @@ export const StartEndModel = Model.extend(extend(
         '.background': {
           fillOpacity: 1,
           strokeWidth: 2,
+          stroke: '#5C606C',
           width: startWidth,
           height: startHeight,
           x: 0,
@@ -77,51 +80,51 @@ export const StartEndModel = Model.extend(extend(
         'text.title': {
           fill: '#FFFFFF',
           fontSize: 11,
-          fontFamily: 'Roboto',
+          // fontFamily: 'Roboto',
           fontWeight: 400,
           text: '',
           width: 96,
           height: 20,
           ref: '.background',
           refY: 8,
-          refX: 40,
+          refX: 12 + 13 + 8,
           textAnchor: 'left',
           alignmentBaseline: 'central',
         },
         'g.error image': {
-          xlinkHref: '',
+          xlinkHref: `${props.imgPrefix}/icon_warn.png`,
           ref: '.background',
           refX: 54,
-          refY: 20,
+          refY: bottomIconY,
           width: 16,
-          height: 13,
+          height: 16,
         },
         'g.icon image': {
-          xlinkHref: '',
+          xlinkHref: `${props.imgPrefix}/icon_newgroup_fff.png`,
           ref: '.background',
+          refX: 12,
           refY: 8,
-          refX: 20,
           width: 13,
-          height: 12,
+          height: iconHeight,
         },
         'g.code image': {
-          xlinkHref: '',
+          xlinkHref: `${props.imgPrefix}/icon_newgroup_ccc.png`,
           ref: '.background',
-          refY: 32,
-          refX: 13,
+          refX: 12,
+          refY: bottomIconY,
           width: 17,
-          height: 16,
+          height: 17,
         },
         '.inPorts circle': {
           type: 'input',
           ref: '.background',
-          refY: 20,
+          refY: props.gridSize,
         },
         '.outPorts circle': {
           type: 'output',
           ref: '.background',
-          refX: 80,
-          refY: 20,
+          refX: startWidth,
+          refY: props.gridSize,
         },
       },
     }, Model.prototype.defaults),
