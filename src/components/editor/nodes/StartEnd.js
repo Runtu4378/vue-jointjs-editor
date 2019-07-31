@@ -100,7 +100,7 @@ export const StartEndModel = Model.extend(extend(
           height: 16,
         },
         'g.icon image': {
-          xlinkHref: `${props.imgPrefix}/icon_newgroup_fff.png`,
+          xlinkHref: `${props.imgPrefix}/icon_task.png`,
           ref: '.background',
           refX: 12,
           refY: 8,
@@ -108,7 +108,7 @@ export const StartEndModel = Model.extend(extend(
           height: iconHeight,
         },
         'g.code image': {
-          xlinkHref: `${props.imgPrefix}/icon_newgroup_ccc.png`,
+          xlinkHref: `${props.imgPrefix}/icon_compile.png`,
           ref: '.background',
           refX: 12,
           refY: bottomIconY,
