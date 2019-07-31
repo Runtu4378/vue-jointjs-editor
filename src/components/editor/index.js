@@ -22,6 +22,7 @@ export default class Editor {
     this.initInstance()
     nodeDefine()
     this.initStartAndEnd()
+    console.log(joint.shapes)
   }
 
   /** 初始化joint实例 */
@@ -34,7 +35,7 @@ export default class Editor {
       height: '100%',
       gridSize: props.gridSize,
       drawGrid: 'dot',
-      // cellViewNamespace: joint.shapes,
+      cellViewNamespace: joint.shapes,
     })
   }
 
