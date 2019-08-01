@@ -3,10 +3,14 @@
 import * as joint from 'jointjs'
 import 'jointjs/dist/joint.css'
 import {
+  bind,
   defaults,
+  each,
+  filter,
 } from 'lodash'
 
 import props from './props.js'
+import './views/Selection.js'
 import nodeDefine from './nodes/index.js'
 
 export default class Editor {
@@ -17,6 +21,8 @@ export default class Editor {
   /** joint.paper 实例 */
   paper = null
 
+  selection = null
+
   constructor ({
     id,
     theme = 'light',
@@ -26,9 +32,10 @@ export default class Editor {
     this.initInstance()
     this.initTheme(theme)
     nodeDefine()
-    console.log(joint.shapes)
+    console.log(joint)
     this.initStartAndEnd()
     this.initOtherExample()
+    this.initSelection()
   }
 
   /** 初始化joint实例 */
@@ -112,6 +119,24 @@ export default class Editor {
     window.PLAYBOOK_THEME = theme
   }
 
+  /** 初始化 */
+  initSelection () {
+    this.selection = new joint.ui.Selection({
+      paper: this.paper,
+      filter: [`${props.prefix}.StartEnd`],
+    })
+    this.selection.removeHandle('rotate')
+    this.selection.removeHandle('resize')
+    this.selection.changeHandle('remove', {
+      position: 'ne',
+      events: {
+        pointerdown: null,
+      },
+    })
+    this.selection.on('selection-box:pointerdown', bind(this.selectionMouseDown, this))
+    this.selection.on('action:remove:pointerdown', bind(this.removeSelected, this))
+  }
+
   /** 初始化起点终点 */
   initStartAndEnd () {
     const startNode = new joint.shapes.cmChart.StartEnd('START')
@@ -140,4 +165,65 @@ export default class Editor {
     )
     this.graph.addCell(actionNode)
   }
+
+  /** 事件处理-start */
+  removeAction (model) {
+    const e = this.paper.findViewByModel(model)
+    const i = model.get('action')
+
+    this.resetSelection()
+    this.blocks.remove(model)
+    this.graph.removeLinks(model)
+
+    const n = this.graph.get('cells')
+    this.graph.resetCells(filter(n.models, function (e) {
+      return e.id !== model.id
+    }))
+    e.remove()
+    this.blockCleanup(model, i)
+    this.updateBlockOrder()
+    this.dispatcher.trigger('editor:close')
+    this.dispatcher.trigger('debug:close')
+    this.dispatcher.trigger('code:update')
+    this.dispatcher.trigger('playbook:change:code')
+  }
+  selectionMouseDown (target, event) {
+    if (event.ctrlKey || event.metaKey) {
+      this.selection.collection.remove(target.model)
+    }
+  }
+  removeSelected (event) {
+    event.stopPropagation()
+    var itemGet = filter(this.selection.collection.models, function (node) {
+      return node.get('type') === `${props.prefix}.StartEnd`
+    })
+    var removeLength = itemGet.length > 0
+      ? this.selection.collection.length - itemGet.length
+      : this.selection.collection.length
+    let message = 'Are you sure you want to delete ' + (removeLength > 1 ? 'these ' + removeLength + ' ' : 'this ') + ' block' + (removeLength > 1 ? 's' : '') + '?'
+    if (removeLength !== 0) {
+      if (itemGet > 0) {
+        message += '<br/><br/>The Start and End blocks cannot be deleted.'
+      }
+      var props = {
+        title: 'Remove selected blocks',
+        message: message,
+      }
+      const callback = bind(this.confirmRemoveSelected, this)
+      this.dispatcher.trigger('alert:show', props, {
+        callback: callback,
+      })
+    }
+  }
+  confirmRemoveSelected () {
+    const that = this
+    each(this.selection.collection.models, (node) => {
+      if (node.get('type') !== 'coa.StartEnd') {
+        // TODO 连通下面这行的逻辑
+        // that.removeAction(node)
+      }
+    })
+    this.selection.collection.reset([])
+  }
+  /** 事件处理-end */
 }
