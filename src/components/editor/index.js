@@ -36,6 +36,7 @@ export default class Editor {
     this.initStartAndEnd()
     this.initOtherExample()
     this.initSelection()
+    this.initEvent()
   }
 
   /** 初始化joint实例 */
@@ -119,7 +120,7 @@ export default class Editor {
     window.PLAYBOOK_THEME = theme
   }
 
-  /** 初始化 */
+  /** 初始化MVC */
   initSelection () {
     this.selection = new joint.ui.Selection({
       paper: this.paper,
@@ -135,6 +136,11 @@ export default class Editor {
     })
     this.selection.on('selection-box:pointerdown', bind(this.selectionMouseDown, this))
     this.selection.on('action:remove:pointerdown', bind(this.removeSelected, this))
+  }
+
+  /** 初始化事件监听 */
+  initEvent () {
+    this.paper.on('cell:pointerclick', this.cellMouseClick, this)
   }
 
   /** 初始化起点终点 */
@@ -224,6 +230,32 @@ export default class Editor {
       }
     })
     this.selection.collection.reset([])
+  }
+
+  cellMouseClick (target, evt) {
+    // console.log(target)
+    // console.log(evt)
+    // console.log(this.selection)
+    // return
+    // var activeIdx = this.blocks.getActive()
+    this.dispatcher.trigger('body:click')
+    // this.clearSelector()
+    // if (target.model !== activeIdx) {
+      // this.resetSelection()
+      if (
+        !evt.metaKey &&
+        target.model &&
+        target.model.get('type') !== 'link'
+      ) {
+        this.coa.set('blockX', target.model.position().x)
+        this.coa.set('actionSelectState', target.model.get('state'))
+        this.coa.set('codeView', 'block')
+        this.collectBlockData(target.model)
+        target.model.set('active', true)
+        this.removeIntro()
+      }
+      target.model.toFront()
+    // }
   }
   /** 事件处理-end */
 }
