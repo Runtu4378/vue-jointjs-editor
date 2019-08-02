@@ -2,7 +2,6 @@
 
 import View from './view'
 import Model from './model'
-import Props from '../models/props'
 
 export default class Viewer {
   props = null
@@ -12,7 +11,6 @@ export default class Viewer {
   constructor ({
     id,
   }) {
-    this.props = new Props()
     this.model = new Model({
       id,
     }, this)

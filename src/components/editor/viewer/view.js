@@ -8,6 +8,8 @@ import {
 } from 'lodash'
 import * as joint from 'jointjs'
 
+import defaultProps from '../defaultProps'
+
 /** 管理jointjs的渲染和事件传递 */
 export default View.extend({
   el: '',
@@ -26,8 +28,6 @@ export default View.extend({
 
   /** 初始化jointjs实例 */
   initJointInstance: function () {
-    const props = this.context.props
-
     this.graph = new joint.dia.Graph()
     this.paper = new joint.dia.Paper({
       el: document.getElementById(this.id),
@@ -40,7 +40,7 @@ export default View.extend({
         radius: 50,
       },
       drawGrid: true,
-      gridSize: props.gridSize,
+      gridSize: defaultProps.gridSize,
       clickThreshold: 10,
       cellViewNamespace: joint.shapes,
 
@@ -90,8 +90,8 @@ export default View.extend({
               : cellViewS === cellViewT
                 ? false
                 : (
-                  cellViewT.model.get('type') === `${props.prefix}.StartEnd` &&
-                  cellViewS.model.get('type') === `${props.prefix}.StartEnd`
+                  cellViewT.model.get('type') === `${defaultProps.prefix}.StartEnd` &&
+                  cellViewS.model.get('type') === `${defaultProps.prefix}.StartEnd`
                 )
                   ? false
                   : magnetS != magnetT

@@ -10,7 +10,7 @@ import {
   omit,
 } from 'lodash'
 
-import props from '../props.js'
+import defaultProps from '../defaultProps'
 
 joint.shapes.basic.PortsModelInterface = {
   initialize: function () {
@@ -108,7 +108,7 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
   <text class="port-label"/>
 </g>`,
     defaults: defaultsDeep({
-      type: `${props.prefix}.Base`,
+      type: `${defaultProps.prefix}.Base`,
     }, joint.shapes.devs.Model.prototype.defaults),
 
     initialize: function () {

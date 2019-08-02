@@ -6,15 +6,15 @@ import {
   extend,
 } from 'lodash'
 
-import props from '../props.js'
-import * as getSettings from '../getSettings.js'
+import defaultProps from '../defaultProps'
+import * as getSettings from '../getSettings'
 import {
   Model,
   View,
 } from './base.js'
 
-const itemWidth = props.gridSize * 9
-const itemHeight = props.gridSize * 5
+const itemWidth = defaultProps.gridSize * 9
+const itemHeight = defaultProps.gridSize * 5
 
 export const ActionModel = Model.extend(extend({}, {
   markup: `<g class="rotatable">
@@ -37,7 +37,7 @@ export const ActionModel = Model.extend(extend({}, {
 </g>
 `,
   defaults: defaultsDeep({
-    type: `${props.prefix}.Action`,
+    type: `${defaultProps.prefix}.Action`,
     size: {
       width: itemWidth,
       height: itemHeight,
@@ -153,7 +153,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 20,
       },
       'g.delete image': {
-        xlinkHref: `${props.imgPrefix}/block_delete.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_delete.svg`,
         ref: '.background',
         refY: -12,
         refX: 168,
@@ -171,7 +171,7 @@ export const ActionModel = Model.extend(extend({}, {
         },
       },
       'g.approver image': {
-        xlinkHref: `${props.imgPrefix}/block_icon_approver_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_approver_${PLAYBOOK_THEME}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 11,
@@ -179,7 +179,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 16,
       },
       'g.timer image': {
-        xlinkHref: `${props.imgPrefix}/block_icon_delay_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_delay_${PLAYBOOK_THEME}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 35,
@@ -187,7 +187,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 15,
       },
       'g.code image': {
-        xlinkHref: `${props.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 58,
@@ -195,7 +195,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 13,
       },
       'g.notes image': {
-        xlinkHref: `${props.imgPrefix}/block_icon_note_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_note_${PLAYBOOK_THEME}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 85,
@@ -208,15 +208,15 @@ export const ActionModel = Model.extend(extend({}, {
       '.inPorts circle': {
         type: 'input',
         ref: '.background',
-        refY: props.gridSize * 2,
-        fill: props.portBgColor,
+        refY: defaultProps.gridSize * 2,
+        fill: defaultProps.portBgColor,
       },
       '.outPorts circle': {
         type: 'output',
         ref: '.background',
         refX: itemWidth,
-        refY: props.gridSize * 2,
-        fill: props.portBgColor,
+        refY: defaultProps.gridSize * 2,
+        fill: defaultProps.portBgColor,
       },
     },
 
@@ -257,7 +257,7 @@ export const ActionModel = Model.extend(extend({}, {
       var img = getSettings.getBlockIcon(actionType)
       node.attr({
         'g.icon image': {
-          xlinkHref: `${props.imgPrefix}/` + img,
+          xlinkHref: `${defaultProps.imgPrefix}/` + img,
         },
       })
     })

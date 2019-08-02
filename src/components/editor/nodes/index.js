@@ -2,7 +2,7 @@
 
 import * as joint from 'jointjs'
 
-import props from '../props.js'
+import defaultProps from '../defaultProps'
 
 import {
   StartEndModel,
@@ -15,9 +15,9 @@ import {
 
 /** 初始化自动自组件 */
 export default () => {
-  joint.shapes[props.prefix] = {}
-  joint.shapes[props.prefix].StartEnd = StartEndModel
-  joint.shapes[props.prefix].StartEndView = StartEndView
-  joint.shapes[props.prefix].Action = ActionModel
-  joint.shapes[props.prefix].ActionView = ActionView
+  joint.shapes[defaultProps.prefix] = {}
+  joint.shapes[defaultProps.prefix].StartEnd = StartEndModel
+  joint.shapes[defaultProps.prefix].StartEndView = StartEndView
+  joint.shapes[defaultProps.prefix].Action = ActionModel
+  joint.shapes[defaultProps.prefix].ActionView = ActionView
 }

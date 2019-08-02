@@ -9,7 +9,7 @@ import {
   filter,
 } from 'lodash'
 
-import props from './props.js'
+import defaultProps from './defaultProps'
 import './views/Selection.js'
 import nodeDefine from './nodes/index.js'
 
@@ -53,7 +53,7 @@ export default class Editor {
         radius: 50,
       },
       drawGrid: true,
-      gridSize: props.gridSize,
+      gridSize: defaultProps.gridSize,
       clickThreshold: 10,
       cellViewNamespace: joint.shapes,
 
@@ -103,8 +103,8 @@ export default class Editor {
               : cellViewS === cellViewT
                 ? false
                 : (
-                  cellViewT.model.get('type') === `${props.prefix}.StartEnd` &&
-                  cellViewS.model.get('type') === `${props.prefix}.StartEnd`
+                  cellViewT.model.get('type') === `${defaultProps.prefix}.StartEnd` &&
+                  cellViewS.model.get('type') === `${defaultProps.prefix}.StartEnd`
                 )
                   ? false
                   : magnetS != magnetT
@@ -124,7 +124,7 @@ export default class Editor {
   initSelection () {
     this.selection = new joint.ui.Selection({
       paper: this.paper,
-      filter: [`${props.prefix}.StartEnd`],
+      filter: [`${defaultProps.prefix}.StartEnd`],
     })
     this.selection.removeHandle('rotate')
     this.selection.removeHandle('resize')
@@ -147,16 +147,16 @@ export default class Editor {
   initStartAndEnd () {
     const startNode = new joint.shapes.cmChart.StartEnd('START')
     startNode.position(
-      props.gridSize * 3,
-      props.gridSize * 6,
+      defaultProps.gridSize * 3,
+      defaultProps.gridSize * 6,
     )
     startNode.set('outPorts', ['out'])
     this.graph.addCell(startNode)
 
     const endNode = new joint.shapes.cmChart.StartEnd('END')
     endNode.position(
-      props.gridSize * 3,
-      props.gridSize * 12,
+      defaultProps.gridSize * 3,
+      defaultProps.gridSize * 12,
     )
     endNode.set('inPorts', ['in'])
     this.graph.addCell(endNode)
@@ -166,8 +166,8 @@ export default class Editor {
   initOtherExample () {
     const actionNode = new joint.shapes.cmChart.Action()
     actionNode.position(
-      props.gridSize * 12,
-      props.gridSize * 6,
+      defaultProps.gridSize * 12,
+      defaultProps.gridSize * 6,
     )
     this.graph.addCell(actionNode)
   }

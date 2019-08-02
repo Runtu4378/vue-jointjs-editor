@@ -1,12 +1,13 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
-window.PLAYBOOK_THEME = 'light'
-
-export default {
+const defaultProps = {
   /** 栅格大小 */
   gridSize: 20,
   /** 组件前缀 */
   prefix: 'cmChart',
+
+  /** 主题 */
+  theme: 'light',
 
   /** 图片前缀 */
   imgPrefix: '/joi/img',
@@ -20,3 +21,7 @@ export default {
   /** 端点配置 */
   portBgColor: '#51B252',
 }
+
+window.PLAYBOOK_THEME = 'light'
+
+export default defaultProps
