@@ -19,6 +19,8 @@ export default class Editor {
   graph = null
   /** jointjs的paper实例 */
   paper = null
+  /** 节点实例 */
+  nodes = new Map()
 
   constructor ({
     id,
@@ -31,24 +33,6 @@ export default class Editor {
     // this.initOtherExample()
     // this.initSelection()
     // this.initEvent()
-  }
-
-  /** 初始化MVC */
-  initSelection () {
-    this.selection = new joint.ui.Selection({
-      paper: this.paper,
-      filter: [`${defaultProps.prefix}.StartEnd`],
-    })
-    this.selection.removeHandle('rotate')
-    this.selection.removeHandle('resize')
-    this.selection.changeHandle('remove', {
-      position: 'ne',
-      events: {
-        pointerdown: null,
-      },
-    })
-    this.selection.on('selection-box:pointerdown', bind(this.selectionMouseDown, this))
-    this.selection.on('action:remove:pointerdown', bind(this.removeSelected, this))
   }
 
   /** 初始化事件监听 */
@@ -64,30 +48,15 @@ export default class Editor {
       defaultProps.gridSize * 6,
     )
     startNode.set('outPorts', ['out'])
-    // const startNode = {
-    //   type: `${defaultProps.prefix}.StartEnd`,
-    //   position: {
-    //     x: defaultProps.gridSize * 3,
-    //     y: defaultProps.gridSize * 6,
-    //   },
-    // }
-    this.viewer.setData([startNode])
-    console.log(this.viewer)
-    // const startNode = new joint.shapes.cmChart.StartEnd('START')
-    // startNode.position(
-    //   defaultProps.gridSize * 3,
-    //   defaultProps.gridSize * 6,
-    // )
-    // startNode.set('outPorts', ['out'])
-    // this.graph.addCell(startNode)
 
-    // const endNode = new joint.shapes.cmChart.StartEnd('END')
-    // endNode.position(
-    //   defaultProps.gridSize * 3,
-    //   defaultProps.gridSize * 12,
-    // )
-    // endNode.set('inPorts', ['in'])
-    // this.graph.addCell(endNode)
+    const endNode = new joint.shapes.cmChart.StartEnd('END')
+    endNode.position(
+      defaultProps.gridSize * 3,
+      defaultProps.gridSize * 12,
+    )
+    endNode.set('inPorts', ['in'])
+    this.viewer.setData([startNode, endNode])
+    // console.log(this.viewer)
   }
 
   /** 插入其他示例节点 */

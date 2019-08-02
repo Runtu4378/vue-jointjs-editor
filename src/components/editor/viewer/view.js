@@ -104,8 +104,8 @@ export default View.extend({
 
   /** 更新节点 */
   updateNode (model, node) {
-    console.log(model)
-    console.log(node)
+    // console.log(model)
+    // console.log(node)
     this.graph.addCell(node)
   },
 })

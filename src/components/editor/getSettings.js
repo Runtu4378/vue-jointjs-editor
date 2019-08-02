@@ -1,5 +1,6 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
-/* globals PLAYBOOK_THEME */
+
+import defaultProps from './defaultProps'
 
 export const lightBlockColors = {
   header: '#171D21',
@@ -69,17 +70,17 @@ export const getBlockIcon = (t) => {
     : smallBlockIcons.generic
 }
 export const getBlockHeaderColor = () => {
-  return PLAYBOOK_THEME === 'dark'
+  return defaultProps === 'dark'
     ? darkBlockColors.header
     : lightBlockColors.header
 }
 export const getBlockBackgroundColor = () => {
-  return PLAYBOOK_THEME === 'dark'
+  return defaultProps === 'dark'
     ? darkBlockColors.background
     : lightBlockColors.background
 }
 export const getBlockBorderColor = () => {
-  return PLAYBOOK_THEME === 'dark'
+  return defaultProps === 'dark'
     ? darkBlockColors.border
     : lightBlockColors.border
 }
