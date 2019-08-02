@@ -14,14 +14,8 @@ import defaultProps from '../defaultProps'
 export default View.extend({
   el: '',
 
-  initialize: function ({
-    /** paperId */
-    id,
-  }, context) {
-    if (!id) {
-      throw new Error('viewer id is require')
-    }
-    this.el = `#${id}`
+  initialize: function (props, context) {
+    this.el = `#${context.id}`
     this.context = context
     this.initJointInstance()
   },
@@ -30,7 +24,7 @@ export default View.extend({
   initJointInstance: function () {
     this.graph = new joint.dia.Graph()
     this.paper = new joint.dia.Paper({
-      el: document.getElementById(this.id),
+      el: document.getElementById(this.context.id),
       model: this.graph,
       width: '100%',
       height: '100%',

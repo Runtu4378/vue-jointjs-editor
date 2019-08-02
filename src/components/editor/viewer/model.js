@@ -9,9 +9,7 @@ export default Model.extend({
     id: null,
   },
 
-  initialize: function ({
-    id,
-  }, context) {
-    this.id = id
+  initialize: function (props, context) {
+    this.id = context.id
   },
 })

@@ -4,18 +4,15 @@ import View from './view'
 import Model from './model'
 
 export default class Viewer {
-  props = null
+  id = null
   model = null
   view = null
 
   constructor ({
     id,
   }) {
-    this.model = new Model({
-      id,
-    }, this)
-    this.view = new View({
-      id,
-    }, this)
+    this.id = id
+    this.model = new Model({}, this)
+    this.view = new View({}, this)
   }
 }
