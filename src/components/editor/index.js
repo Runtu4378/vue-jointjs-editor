@@ -4,120 +4,33 @@ import * as joint from 'jointjs'
 import 'jointjs/dist/joint.css'
 import {
   bind,
-  defaults,
   each,
   filter,
 } from 'lodash'
 
 import defaultProps from './defaultProps'
+import Viewer from './viewer'
 import './views/Selection.js'
-import nodeDefine from './nodes/index.js'
 
 export default class Editor {
   /** 挂载dom的id */
   id = null
-  /** joint.graph 实例 */
+  /** jointjs的graph实例 */
   graph = null
-  /** joint.paper 实例 */
+  /** jointjs的paper实例 */
   paper = null
-
-  selection = null
 
   constructor ({
     id,
-    theme = 'light',
-    value,
   }) {
     this.id = id
-    this.initInstance()
-    this.initTheme(theme)
-    nodeDefine()
-    console.log(joint)
+    this.viewer = new Viewer({ id })
+    this.graph = this.viewer.graph
+    this.paper = this.viewer.paper
     this.initStartAndEnd()
-    this.initOtherExample()
-    this.initSelection()
-    this.initEvent()
-  }
-
-  /** 初始化joint实例 */
-  initInstance () {
-    this.graph = new joint.dia.Graph()
-    this.paper = new joint.dia.Paper({
-      el: document.getElementById(this.id),
-      model: this.graph,
-      width: '100%',
-      height: '100%',
-      multiLinks: false,
-      perpendicularLinks: true,
-      snapLinks: {
-        radius: 50,
-      },
-      drawGrid: true,
-      gridSize: defaultProps.gridSize,
-      clickThreshold: 10,
-      cellViewNamespace: joint.shapes,
-
-      linkView: joint.dia.LinkView.extend({
-        options: defaults({
-          doubleLinkTools: true,
-          doubleLinkToolsOffset: 40,
-        }, joint.dia.LinkView.prototype.options),
-      }),
-      defaultLink: new joint.dia.Link({
-        connector: {
-          name: 'rounded',
-          args: {
-            radius: 5,
-          },
-        },
-        router: {
-          name: 'metro',
-        },
-        startDirections: ['right'],
-        endDirections: ['left'],
-        attrs: {
-          '.marker-target': {
-            d: 'M 10 0 L 0 5 L 10 10 z',
-            fill: '#818D99',
-            stroke: '#818D99',
-          },
-          '.connection': {
-            stroke: '#818D99',
-            strokeWidth: 2,
-          },
-        },
-      }),
-      interactive: function (target) {
-        return target.model instanceof joint.dia.Link ? {
-          vertexAdd: false,
-        } : true
-      },
-      // 校验连接是否成立
-      validateConnection: function (cellViewS, magnetS, cellViewT, magnetT) {
-        return cellViewT.model.get('type') === 'link'
-          ? false
-          : (magnetS && magnetS.getAttribute('type') === 'input')
-            ? false
-            : (magnetT && magnetT.getAttribute('type') === 'output')
-              ? false
-              : cellViewS === cellViewT
-                ? false
-                : (
-                  cellViewT.model.get('type') === `${defaultProps.prefix}.StartEnd` &&
-                  cellViewS.model.get('type') === `${defaultProps.prefix}.StartEnd`
-                )
-                  ? false
-                  : magnetS != magnetT
-      },
-      validateMagnet: function (t, e) {
-        return e.getAttribute('type') !== 'input'
-      },
-    })
-  }
-
-  /** 初始化主题配置 */
-  initTheme (theme) {
-    window.PLAYBOOK_THEME = theme
+    // this.initOtherExample()
+    // this.initSelection()
+    // this.initEvent()
   }
 
   /** 初始化MVC */
@@ -145,21 +58,36 @@ export default class Editor {
 
   /** 初始化起点终点 */
   initStartAndEnd () {
-    const startNode = new joint.shapes.cmChart.StartEnd('START')
+    const startNode = new joint.shapes[defaultProps.prefix].StartEnd('START')
     startNode.position(
       defaultProps.gridSize * 3,
       defaultProps.gridSize * 6,
     )
     startNode.set('outPorts', ['out'])
-    this.graph.addCell(startNode)
+    // const startNode = {
+    //   type: `${defaultProps.prefix}.StartEnd`,
+    //   position: {
+    //     x: defaultProps.gridSize * 3,
+    //     y: defaultProps.gridSize * 6,
+    //   },
+    // }
+    this.viewer.setData([startNode])
+    console.log(this.viewer)
+    // const startNode = new joint.shapes.cmChart.StartEnd('START')
+    // startNode.position(
+    //   defaultProps.gridSize * 3,
+    //   defaultProps.gridSize * 6,
+    // )
+    // startNode.set('outPorts', ['out'])
+    // this.graph.addCell(startNode)
 
-    const endNode = new joint.shapes.cmChart.StartEnd('END')
-    endNode.position(
-      defaultProps.gridSize * 3,
-      defaultProps.gridSize * 12,
-    )
-    endNode.set('inPorts', ['in'])
-    this.graph.addCell(endNode)
+    // const endNode = new joint.shapes.cmChart.StartEnd('END')
+    // endNode.position(
+    //   defaultProps.gridSize * 3,
+    //   defaultProps.gridSize * 12,
+    // )
+    // endNode.set('inPorts', ['in'])
+    // this.graph.addCell(endNode)
   }
 
   /** 插入其他示例节点 */

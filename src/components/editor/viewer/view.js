@@ -9,15 +9,21 @@ import {
 import * as joint from 'jointjs'
 
 import defaultProps from '../defaultProps'
+import nodeDefine from '../nodes'
 
 /** 管理jointjs的渲染和事件传递 */
 export default View.extend({
+  graph: null,
+  paper: null,
+
   el: '',
 
   initialize: function (props, context) {
     this.el = `#${context.id}`
     this.context = context
     this.initJointInstance()
+    nodeDefine()
+    context.model.on('change:collection', this.updateNode, this)
   },
 
   /** 初始化jointjs实例 */
@@ -94,5 +100,12 @@ export default View.extend({
         return e.getAttribute('type') !== 'input'
       },
     })
+  },
+
+  /** 更新节点 */
+  updateNode (model, node) {
+    console.log(model)
+    console.log(node)
+    this.graph.addCell(node)
   },
 })
