@@ -19,6 +19,7 @@ export default class Viewer {
   }
 
   setData (data = []) {
+    // console.log(data)
     this.model.set({ collection: data })
   }
 }
