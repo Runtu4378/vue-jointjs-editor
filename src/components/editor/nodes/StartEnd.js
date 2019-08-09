@@ -4,7 +4,7 @@
 // import * as joint from 'jointjs'
 import {
   defaultsDeep,
-  // extend,
+  extend,
 } from 'lodash'
 
 import defaultProps from '../defaultProps'
@@ -18,7 +18,7 @@ const startHeight = defaultProps.gridSize * 3
 const iconHeight = 13
 const bottomIconY = startHeight - 17 - 10
 
-export const StartEndModel = Model.extend({
+export const StartEndModel = Model.extend(extend({}, {
   markup: `<g class="rotatable">
   <g class="inPorts"/><g class="outPorts"/>
   <g class="scalable"></g>
@@ -173,7 +173,7 @@ export const StartEndModel = Model.extend({
       name: '',
     })
   },
-})
+}))
 
 export const StartEndView = View.extend({
   initialize: function () {

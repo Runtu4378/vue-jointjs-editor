@@ -5,13 +5,17 @@ import 'jointjs/dist/joint.css'
 import {
   bind,
   each,
+  extend,
   filter,
 } from 'lodash'
+
+import _bb from 'backbone'
 
 import defaultProps from './defaultProps'
 import Viewer from './viewer'
 import './views/Selection.js'
 import Model from './model'
+import Coa from './models/coa'
 
 export default class Editor {
   /** 挂载dom的id */
@@ -31,12 +35,30 @@ export default class Editor {
     this.graph = this.viewer.graph
     this.paper = this.viewer.paper
     this.model = new Model()
+    this.initMineBackbone()
     this.initEvent()
     this.initStartAndEnd()
     this.initOtherExample()
     // this.initSelection()
   }
 
+  /** 初始化自定义backbone实例 */
+  initMineBackbone () {
+    const dispatcher = extend({}, _bb.Events, {
+      cid: 'dispatcher',
+    })
+    return each([
+      _bb.Collection.prototype,
+      _bb.Model.prototype,
+      _bb.View.prototype,
+      _bb.Router.prototype,
+    ], function (n) {
+      return extend(n, {
+        dispatcher,
+        coa: new Coa(),
+      })
+    })
+  }
   /** 初始化事件监听 */
   initEvent () {
     this.paper.on('cell:pointerclick', this.cellMouseClick, this)
@@ -163,6 +185,7 @@ export default class Editor {
   }
 
   cellMouseClick (target, evt) {
+    console.log(arguments)
     // console.log(target)
     // console.log(evt)
     // console.log(this.selection)

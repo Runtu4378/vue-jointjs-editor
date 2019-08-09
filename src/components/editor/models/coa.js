@@ -1,4 +1,10 @@
+/* eslint comma-dangle: ["error", "always-multiline"] */
+
 import _ba from 'backbone'
+
+import {
+  each,
+} from 'lodash'
 
 export default _ba.Model.extend({
   defaults: {
@@ -28,12 +34,12 @@ export default _ba.Model.extend({
     globalBlockStart: 1,
     editorLineStart: 1,
     errorLine: 0,
-    codeChanged: !1,
-    propsChanged: !1,
+    codeChanged: false,
+    propsChanged: false,
     actionSelectMode: 'apps',
     actionSelectState: '',
     showContains: true,
-    missingAssetCount: 0
+    missingAssetCount: 0,
   },
   initialize: function () {
     this.action_keys = {}
@@ -47,30 +53,42 @@ export default _ba.Model.extend({
     this.on('change:editMode', this.editModeChange, this)
     this.on('change:errorLine', this.clearErrorLine, this)
   },
-  frameState: function (t) {
-    return typeof t !== 'undefined' && this.set('frameState', t), this.get('frameState')
+  frameState: function (target) {
+    if (typeof target !== 'undefined') {
+      this.set('frameState', target)
+    }
+    return this.get('frameState')
   },
-  frameSplit: function (t) {
-    return "undefined" != typeof t && this.set("frameSplit", t), this.get("frameSplit")
+  frameSplit: function (target) {
+    if (typeof target !== 'undefined') {
+      this.set('frameSplit', target)
+    }
+    return this.get('frameSplit')
   },
   isEditorOpen: function () {
-    return this.get("editorOpen")
+    return this.get('editorOpen')
   },
   isDebugOpen: function () {
-    return this.get("debugOpen")
+    return this.get('debugOpen')
   },
-  setEditor: function (t) {
-    this.set("editorOpen", t)
+  setEditor: function (target) {
+    this.set('editorOpen', target)
   },
-  setDebug: function (t) {
-    this.set("debugOpen", t)
+  setDebug: function (target) {
+    this.set('debugOpen', target)
   },
   editModeChange: function (t, e) {
-    e ? this.dispatcher.trigger("mode:edit") : this.dispatcher.trigger("mode:view")
+    if (e) {
+      this.dispatcher.trigger('mode:edit')
+    } else {
+      this.dispatcher.trigger('mode:view')
+    }
   },
   clearErrorLine: function (t, e) {
-    0 === e && _.each(this.blocks.models, function (t) {
-      t.errors = 0
-    })
-  }
+    if (e === 0) {
+      each(this.blocks.models, function (t) {
+        t.errors = 0
+      })
+    }
+  },
 })
