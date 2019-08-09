@@ -289,69 +289,129 @@ export default Base.extend({
       s += 'datapath=' + z + ')'
       D === 'container' && f === '' && (f = 'container_item[' + a + ']')
     }
-    a > 0 && (s += "\n" + this.indent(1) + "container_data = phantom.collect2(container=container, ", s += "datapath=" + z + ")", "container" === D && "" === f && (f = "container_item[" + a + "]"))
-    r > 0 && (s += "\n" + this.indent(1) + "passed_filtered_artifact_data = phantom.collect2(container=container, ", s += "datapath=" + L + ", filter_artifacts=filtered_artifacts)", "filtered_container" === D && "" === f && (f = "passed_filtered_artifact_item[" + r + "]"))
+    if (r > 0) {
+      s += '\n' + this.indent(1) + 'passed_filtered_artifact_data = phantom.collect2(container=container, '
+      s += 'datapath=' + L + ', filter_artifacts=filtered_artifacts)'
+      D === 'filtered_container' && f === '' && (f = 'passed_filtered_artifact_item[' + r + ']')
+    }
     _.each(k, function (t, i) {
       var n = _.map(b[t], function (t) {
         return "'" + t + "'"
-      });
-      n.push("'" + t + ":action_result.parameter.context.artifact_id'");
-      var o = "[" + n.join(", ") + "]";
-      s += "\n" + e.indent(1) + "results_data_" + (i + 1) + " = phantom.collect2(container=container, datapath=" + o + ", action_results=results)", "results" === D && "" === f && (f = "results_item_" + (i + 1) + "[" + (n.length - 1) + "]")
+      })
+      n.push("'" + t + ":action_result.parameter.context.artifact_id'")
+      var o = '[' + n.join(', ') + ']'
+      s += '\n' + e.indent(1) + 'results_data_' + (i + 1) + ' = phantom.collect2(container=container, datapath=' + o + ', action_results=results)'
+      D === 'results' && f === '' && (f = 'results_item_' + (i + 1) + '[' + (n.length - 1) + ']')
     })
     _.each(I, function (t, i) {
       var n = _.map(y[t], function (t) {
         return "'" + t + "'"
-      });
-      n.push("'" + t + ":artifact:*.id'");
-      var o = "[" + n.join(", ") + "]";
-      s += "\n" + e.indent(1) + "inputs_data_" + (i + 1) + " = phantom.collect2(container=container, datapath=" + o + ", action_results=results)", "inputs" === D && "" === f && (f = "inputs_item_" + (i + 1) + "[" + (n.length - 1) + "]")
+      })
+      n.push("'" + t + ":artifact:*.id'")
+      var o = '[' + n.join(', ') + ']'
+      s += '\n' + e.indent(1) + 'inputs_data_' + (i + 1) + ' = phantom.collect2(container=container, datapath=' + o + ', action_results=results)'
+      D === 'inputs' && f === '' && (f = 'inputs_item_' + (i + 1) + '[' + (n.length - 1) + ']')
     })
     _.each(M, function (t, i) {
       var n = _.map(v[t], function (t) {
         return "'" + t + "'"
-      });
-      n.push("'" + t + ":artifact:*.id'");
-      var o = "[" + n.join(", ") + "]";
-      s += "\n" + e.indent(1) + "filtered_artifacts_data_" + (i + 1) + " = phantom.collect2(container=container, datapath=" + o + ")", "filtered-artifacts" === D && "" === f && (f = "filtered_artifacts_item_" + (i + 1) + "[" + (n.length - 1) + "]")
+      })
+      n.push("'" + t + ":artifact:*.id'")
+      var o = '[' + n.join(', ') + ']'
+      s += '\n' + e.indent(1) + 'filtered_artifacts_data_' + (i + 1) + ' = phantom.collect2(container=container, datapath=' + o + ')'
+      D === 'filtered-artifacts' && f === '' && (f = 'filtered_artifacts_item_' + (i + 1) + '[' + (n.length - 1) + ']')
     })
     _.each(A, function (t, i) {
       var n = _.map(w[t], function (t) {
         return '"' + t + '"'
-      });
-      n.push('"' + t + ':action_result.parameter.context.artifact_id"');
-      var o = "[" + n.join(", ") + "]";
-      s += "\n" + e.indent(1) + "filtered_results_data_" + (i + 1) + " = phantom.collect2(container=container, datapath=" + o + ")", "filtered" === D && "" === f && (f = "filtered_results_item_" + (i + 1) + "[" + (n.length - 1) + "]")
-    }), _.each(S, function (t, i) {
+      })
+      n.push('"' + t + ':action_result.parameter.context.artifact_id"')
+      var o = '[' + n.join(', ') + ']'
+      s += '\n' + e.indent(1) + 'filtered_results_data_' + (i + 1) + ' = phantom.collect2(container=container, datapath=' + o + ')'
+      D === 'filtered' && f === '' && (f = 'filtered_results_item_' + (i + 1) + '[' + (n.length - 1) + ']')
+    })
+    _.each(S, function (t, i) {
       var n = _.map(x[t], function (t) {
         return '"' + t + '"'
-      });
-      n.push('"' + t + ':filtered-action_result.parameter.context.artifact_id"');
-      var o = "[" + n.join(", ") + "]";
-      s += "\n" + e.indent(1) + "passed_filtered_results_data_" + (i + 1) + " = phantom.collect2(container=container, datapath=" + o + ", action_results=filtered_results)", "legacy-filtered" === D && "" === f && (f = "passed_filtered_results_item_" + (i + 1) + "[" + (n.length - 1) + "]")
-    }), _.each(T, function (t, i) {
-      s += "\n" + e.indent(1) + "formatted_data_" + (i + 1) + " = phantom.get_format_data(name='" + t + "')"
-    });
-    var O = 0;
-    return s += "\n", o += "\n", n.length > 0 && (o += e.indent(1) + "# build parameters list for '" + t.getFunctionName() + "' call\n"), a > 0 && (O += 1, o += e.indent(O) + "for container_item in container_data:\n"), r > 0 && (O += 1, o += e.indent(O) + "for passed_filtered_artifact_item in passed_filtered_artifact_data:\n"), _.each(C, function (t, i) {
-      t.is_list && (O += 1, o += e.indent(O) + "for formatted_part_" + t.idx + " in formatted_data_" + t.idx + ":\n")
-    }), _.each(M, function (t, i) {
-      O += 1, o += e.indent(O) + "for filtered_artifacts_item_" + (i + 1) + " in filtered_artifacts_data_" + (i + 1) + ":\n"
-    }), _.each(k, function (t, i) {
-      O += 1, o += e.indent(O) + "for results_item_" + (i + 1) + " in results_data_" + (i + 1) + ":\n"
-    }), _.each(I, function (t, i) {
-      O += 1, o += e.indent(O) + "for inputs_item_" + (i + 1) + " in inputs_data_" + (i + 1) + ":\n"
-    }), _.each(A, function (t, i) {
-      O += 1, o += e.indent(O) + "for filtered_results_item_" + (i + 1) + " in filtered_results_data_" + (i + 1) + ":\n"
-    }), _.each(S, function (t, i) {
-      O += 1, o += e.indent(O) + "for passed_filtered_results_item_" + (i + 1) + " in passed_filtered_results_data_" + (i + 1) + ":\n"
-    }), _.keys(i).length > 0 && (N.length > 0 && (O += 1, o += e.indent(O) + "if ", _.each(_.unique(N), function (t, e) {
-      0 !== e && (o += " and "), o += t
-    }), o += ":\n"), o += e.indent(O + 1) + "parameters.append({\n", _.each(_.keys(i), function (t, i) {
-      o += e.indent(O + 2) + "'" + t + "': " + n[i] + ",\n"
-    }), "" !== f && (o += e.indent(O + 2) + "# context (artifact id) is added to associate results with the artifact\n", o += e.indent(O + 2) + "'context': {'artifact_id': " + f + "},\n"), o += e.indent(O + 1) + "})\n"), t.get("show_delay") && t.get("delay") > 0 && (o += e.indent(1) + "# calculate start time using delay of " + t.get("delay") + " minutes\n", o += e.indent(1) + "start_time = datetime.now() + timedelta(minutes=" + t.get("delay") + ")\n"), {
-      collect: s,
-      loop: o
+      })
+      n.push('"' + t + ':filtered-action_result.parameter.context.artifact_id"')
+      var o = '[' + n.join(', ') + ']'
+      s += '\n' + e.indent(1) + 'passed_filtered_results_data_' + (i + 1) + ' = phantom.collect2(container=container, datapath=' + o + ', action_results=filtered_results)'
+      D === 'legacy-filtered' && f === '' && (f = 'passed_filtered_results_item_' + (i + 1) + '[' + (n.length - 1) + ']')
+    })
+    _.each(T, function (t, i) {
+      s += '\n' + e.indent(1) + 'formatted_data_' + (i + 1) + " = phantom.get_format_data(name='" + t + "')"
+    })
+
+    var O = 0
+    s += '\n'
+    o += '\n'
+    if (n.length > 0) {
+      o += e.indent(1) + "# build parameters list for '" + t.getFunctionName() + "' call\n"
     }
-  }
+    if (a > 0) {
+      O += 1
+      o += e.indent(O) + 'for container_item in container_data:\n'
+    }
+    if (r > 0) {
+      O += 1
+      o += e.indent(O) + 'for passed_filtered_artifact_item in passed_filtered_artifact_data:\n'
+    }
+    _.each(C, function (t, i) {
+      if (t.is_list) {
+        O += 1
+        o += e.indent(O) + 'for formatted_part_' + t.idx + ' in formatted_data_' + t.idx + ':\n'
+      }
+    })
+    _.each(M, function (t, i) {
+      O += 1
+      o += e.indent(O) + 'for filtered_artifacts_item_' + (i + 1) + ' in filtered_artifacts_data_' + (i + 1) + ':\n'
+    })
+    _.each(k, function (t, i) {
+      O += 1
+      o += e.indent(O) + 'for results_item_' + (i + 1) + ' in results_data_' + (i + 1) + ':\n'
+    })
+    _.each(I, function (t, i) {
+      O += 1
+      o += e.indent(O) + 'for inputs_item_' + (i + 1) + ' in inputs_data_' + (i + 1) + ':\n'
+    })
+    _.each(A, function (t, i) {
+      O += 1
+      o += e.indent(O) + 'for filtered_results_item_' + (i + 1) + ' in filtered_results_data_' + (i + 1) + ':\n'
+    })
+    _.each(S, function (t, i) {
+      O += 1
+      o += e.indent(O) + 'for passed_filtered_results_item_' + (i + 1) + ' in passed_filtered_results_data_' + (i + 1) + ':\n'
+    })
+    if (_.keys(i).length > 0) {
+      if (N.length > 0) {
+        O += 1
+        o += e.indent(O) + 'if '
+        _.each(_.unique(N), function (t, e) {
+          if (e !== 0) {
+            o += ' and '
+          }
+          o += t
+        })
+        o += ':\n'
+      }
+      o += e.indent(O + 1) + 'parameters.append({\n'
+      _.each(_.keys(i), function (t, i) {
+        o += e.indent(O + 2) + "'" + t + "': " + n[i] + ',\n'
+      })
+      if (f !== '') {
+        o += e.indent(O + 2) + '# context (artifact id) is added to associate results with the artifact\n'
+        o += e.indent(O + 2) + "'context': {'artifact_id': " + f + '},\n'
+      }
+      o += e.indent(O + 1) + '})\n'
+    }
+    if (t.get('show_delay') && t.get('delay') > 0) {
+      o += e.indent(1) + '# calculate start time using delay of ' + t.get('delay') + ' minutes\n'
+      o += e.indent(1) + 'start_time = datetime.now() + timedelta(minutes=' + t.get('delay') + ')\n'
+    }
+    return {
+      collect: s,
+      loop: o,
+    }
+  },
 })

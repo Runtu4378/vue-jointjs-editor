@@ -4,6 +4,7 @@ import _backbone from 'backbone'
 import _ from 'underscore'
 
 import StartEnd from './startend'
+import Action from './action'
 
 const template = 'import phantom.rules as phantom\nimport json\nfrom datetime import datetime, timedelta\n\n'
 
@@ -11,7 +12,7 @@ export default _backbone.View.extend({
   initialize: function () {
     this.template = _.template(template)
     this.startend = new StartEnd()
-    this.action = new n
+    this.action = new Action()
     this.filter = new s
     this.decision = new o
     this.prompt = new a
