@@ -1,12 +1,12 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
-import _ba from 'backbone'
+import _bb from 'backbone'
 
 import {
   each,
 } from 'lodash'
 
-export default _ba.Model.extend({
+export default _bb.Model.extend({
   defaults: {
     editMode: false,
     modified: false,
