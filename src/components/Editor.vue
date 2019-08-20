@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import Editor from './editor/index.js'
+// import Editor from './editor/index.js'
+import PlayBook from './playbook/index.js'
 
 export default {
   editor: null,
@@ -15,7 +16,7 @@ export default {
   },
 
   mounted () {
-    this.editor = new Editor({
+    this.editor = new PlayBook({
       id: 'canvas'
     })
   }
