@@ -21,6 +21,7 @@ export const IntroModel = joint.shapes.basic.Generic.extend({
     },
     attrs: {
       '.arrow': {
+        fill: 'green',
         width: 16,
         height: 16,
         transform: 'rotate(45)',
@@ -28,6 +29,7 @@ export const IntroModel = joint.shapes.basic.Generic.extend({
         y: 27,
       },
       '.background': {
+        fill: 'green',
         width: 294,
         height: 108,
         x: 10,

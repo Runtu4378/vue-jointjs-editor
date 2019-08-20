@@ -58,9 +58,9 @@ export default _bb.View.extend({
 
       this.graph.addCell([startBlock, endBlock])
       // 操作提示控件
-      // this.intro = new IntroModel()
-      // this.intro.position(220, 60)
-      // this.graph.addCell([this.intro])
+      this.intro = new IntroModel()
+      this.intro.position(220, 60)
+      this.graph.addCell([this.intro])
       // $('#paper g.start').addClass('pulse')
     }
   },
