@@ -1,6 +1,6 @@
 <template>
   <div class="editor-wrapper">
-    <div id="canvas"></div>
+    <div id="canvas" class="canvas"></div>
   </div>
 </template>
 
@@ -28,5 +28,10 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+
+  .canvas {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>
