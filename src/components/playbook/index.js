@@ -5,6 +5,10 @@ import _lo from 'lodash'
 
 import Manager from './manager'
 
+import Playbook from './models/playbook'
+
+import Blocks from './collections/blocks'
+
 export default class PlayBook {
   /** 挂载dom的id */
   id = null
@@ -14,14 +18,14 @@ export default class PlayBook {
   }) {
     this.id = id
     this.initBBHack()
+    this.init()
   }
 
   // 初始化backbone上下文的hack
   initBBHack () {
-    const mountId = this.id // 编辑器挂载的节点id
-    const manager = new Manager({
-      mountId,
-    })
+    const playbook = new Playbook()
+
+    const blocks = new Blocks()
 
     _lo.each([
       _bb.Collection.prototype,
@@ -30,8 +34,17 @@ export default class PlayBook {
       _bb.Router.prototype,
     ], function (base) {
       return _lo.extend(base, {
-        manager, // 主流程
+        playbook,
+        blocks,
       })
+    })
+  }
+
+  init () {
+    const mountId = this.id // 编辑器挂载的节点id
+
+    this.manager = new Manager({
+      mountId,
     })
   }
 }
