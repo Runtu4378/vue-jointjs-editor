@@ -29,7 +29,8 @@ import {
 
 export default _bb.View.extend({
   el: '',
-  initialize: function (id) {
+  initialize: function (mountId, id) {
+    this.container = $(`#${mountId}`)
     this.el = `#${id}`
     this.mountNodes()
     this.initJointInstance()
@@ -72,6 +73,12 @@ export default _bb.View.extend({
       this.graph.addCell([this.intro])
       $(`${this.el} g.start`).addClass('pulse')
     }
+    this.resizePaper()
+    this.loaded = true
+    this.originX = 0
+    this.originY = 0
+    this.$el.on('mousemove', _.bind(this.onMouseMove, this))
+    return this
   },
   /** 挂载自定义节点 */
   mountNodes: function () {
@@ -183,11 +190,28 @@ export default _bb.View.extend({
   },
 
   /** ---事件处理-start--- */
+  resizePaper: function () {
+    var t = this.container.width()
+    var e = this.container.height()
+    this.paper.setDimensions(t, e)
+  },
+  onMouseMove: function (t) {
+    if (this.doDrag) {
+      this.cancelClick = true
+      if (this.fromX === null) {
+        this.fromX = t.clientX - this.originX
+        this.fromY = t.clientY - this.originY
+      } else {
+        var e = (this.$el.position(), t.clientX - this.fromX)
+        var i = t.clientY - this.fromY
+        this.paper.setOrigin(e, i)
+      }
+    }
+  },
   /** 隐藏提示 */
   removeIntro: function () {
     var t = this
     if (this.intro) {
-      console.log(this.intro)
       var e = this.paper.findViewByModel(this.intro)
       $(`${this.el} g.joint-type-coa-intro`).animate({
         opacity: 0,

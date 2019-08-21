@@ -9,6 +9,7 @@ export default _bb.View.extend({
   initialize: function ({
     mountId, // 编辑器挂载的节点id
   }) {
+    this.mountId = mountId
     this.initDOM(mountId)
     this.render()
   },
@@ -19,6 +20,7 @@ export default _bb.View.extend({
     $(`#${mountId}`).append(`<div id="${canvasId}"></div>`)
   },
   render: function () {
-    this.canvas = new Canvas(this.canvasId)
+    const mountId = this.mountId
+    this.canvas = new Canvas(mountId, this.canvasId)
   },
 })
