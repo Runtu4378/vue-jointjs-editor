@@ -6,6 +6,7 @@ import _lo from 'lodash'
 import Manager from './manager'
 
 import Playbook from './models/playbook'
+import Coa from './models/coa'
 
 import Blocks from './collections/blocks'
 
@@ -27,6 +28,7 @@ export default class PlayBook {
       cid: 'dispatcher',
     })
     const playbook = new Playbook()
+    const coa = new Coa()
     const blocks = new Blocks()
 
     _lo.each([
@@ -38,6 +40,7 @@ export default class PlayBook {
       return _lo.extend(base, {
         dispatcher,
         playbook,
+        coa,
         blocks,
       })
     })

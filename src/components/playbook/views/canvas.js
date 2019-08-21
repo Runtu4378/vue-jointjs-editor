@@ -29,9 +29,17 @@ import {
 
 export default _bb.View.extend({
   el: '',
+  events: {
+    mouseup: 'stopDrag',
+    mouseleave: 'stopDrag',
+  },
   initialize: function (mountId, id) {
     this.container = $(`#${mountId}`)
     this.el = `#${id}`
+    this.fromX = null
+    this.fromY = null
+    this.doDrag = false
+
     this.mountNodes()
     this.initJointInstance()
     this.initSelector()
@@ -77,7 +85,9 @@ export default _bb.View.extend({
     this.loaded = true
     this.originX = 0
     this.originY = 0
-    this.$el.on('mousemove', _.bind(this.onMouseMove, this))
+    // console.log(this.$el)
+    // console.log(this.paper.$el)
+    this.paper.$el.on('mousemove', _.bind(this.onMouseMove, this))
     return this
   },
   /** 挂载自定义节点 */
@@ -154,8 +164,8 @@ export default _bb.View.extend({
               : cellViewS === cellViewT
                 ? false
                 : (
-                  cellViewT.model.get('type') === `${defaultProps.prefix}.StartEnd` &&
-                  cellViewS.model.get('type') === `${defaultProps.prefix}.StartEnd`
+                  cellViewT.model.get('type') === 'coa.StartEnd' &&
+                  cellViewS.model.get('type') === 'coa.StartEnd'
                 )
                   ? false
                   /* eslint-disable-next-line */
@@ -187,9 +197,56 @@ export default _bb.View.extend({
   /** 初始化事件 */
   initEvent: function () {
     this.paper.on('link:connect', this.changeConnection, this)
+    // this.paper.on('blank:pointerdown', this.canvasMouseDown, this)
+    // this.paper.on('blank:pointerup', this.canvasMouseUp, this)
+    this.paper.on('translate', this.paperTranslate, this)
   },
 
   /** ---事件处理-start--- */
+  paperTranslate: function (t, e) {
+    this.originX = t
+    this.originY = e
+  },
+  canvasMouseDown: function (t) {
+    var e = this
+    if (t.target.nodeName === 'svg') {
+      this.clearSelector()
+      this.dragTimer = setTimeout(function () {
+        e.startDrag(t)
+      }, 100)
+    }
+    this.cancelClick = false
+    this.coa.set('codeView', 'full')
+    this.blocks.lastActive = null
+  },
+  canvasMouseUp: function (t) {
+    clearTimeout(this.dragTimer)
+    if (t.target.nodeName === 'svg' && !this.cancelClick) {
+      this.selection.collection.reset([])
+      this.dispatcher.trigger('panel:close')
+      this.dispatcher.trigger('editor:close')
+      this.dispatcher.trigger('debug:close')
+      this.dispatcher.trigger('code:update')
+    }
+  },
+  clearSelector: function () {
+    if (this.active_link) {
+      this.selector.remove()
+      this.active_link = null
+      $('div.tooltip').stop(!0, !1).fadeOut(200, function () {
+        $(this).remove()
+      })
+    }
+  },
+  startDrag: function (t) {
+    this.doDrag = true
+  },
+  stopDrag: function () {
+    console.log('stopDrag')
+    this.doDrag = false
+    this.fromX = null
+    this.fromY = null
+  },
   resizePaper: function () {
     var t = this.container.width()
     var e = this.container.height()
