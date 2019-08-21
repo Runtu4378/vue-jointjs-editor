@@ -75,13 +75,13 @@ export default _bb.View.extend({
   },
   /** 挂载自定义节点 */
   mountNodes: function () {
-    joint.shapes['cmChart'] = {}
-    joint.shapes['cmChart'].Intro = IntroModel
-    joint.shapes['cmChart'].IntroView = IntroView
-    joint.shapes['cmChart'].Selector = SelectorModel
-    joint.shapes['cmChart'].SelectorView = SelectorView
-    joint.shapes['cmChart'].StartEnd = StartEndModel
-    joint.shapes['cmChart'].StartEndView = StartEndView
+    joint.shapes['coa'] = {}
+    joint.shapes['coa'].Intro = IntroModel
+    joint.shapes['coa'].IntroView = IntroView
+    joint.shapes['coa'].Selector = SelectorModel
+    joint.shapes['coa'].SelectorView = SelectorView
+    joint.shapes['coa'].StartEnd = StartEndModel
+    joint.shapes['coa'].StartEndView = StartEndView
   },
   /** 初始化jointjs实例 */
   initJointInstance: function () {
@@ -164,7 +164,7 @@ export default _bb.View.extend({
     this.selector = new SelectorModel()
     this.selection = new joint.ui.Selection({
       paper: this.paper,
-      filter: ['cmChart.StartEnd'],
+      filter: ['coa.StartEnd'],
     })
     this.selection.removeHandle('rotate')
     this.selection.removeHandle('resize')
@@ -187,6 +187,7 @@ export default _bb.View.extend({
   removeIntro: function () {
     var t = this
     if (this.intro) {
+      console.log(this.intro)
       var e = this.paper.findViewByModel(this.intro)
       $(`${this.el} g.joint-type-coa-intro`).animate({
         opacity: 0,
@@ -202,6 +203,37 @@ export default _bb.View.extend({
     var e = this.graph.getCell(t.model.get('target').id)
     this.dispatcher.trigger('code:update')
     this.blockSourceChange(e)
+  },
+  blockSourceChange: function (t) {
+    _.invoke(this.blocks.models, 'generateMenuData')
+    this.validateBlockConfig()
+    this.checkForLoops(t)
+    var e = this.paper.findViewByModel(t)
+    e.$el.find('.joint-highlight-stroke').remove()
+  },
+  validateBlockConfig: function () {
+    _.invoke(this.blocks.models, 'validate', this.graph)
+  },
+  checkForLoops: function (t) {
+    var e = this.graph.getSuccessors(t)
+    var i = this.graph.getPredecessors(t)
+    var n = _.compact(_.invoke(e, 'getFunctionName'))
+    var s = _.compact(_.invoke(i, 'getFunctionName'))
+    var o = _.intersection(n, s)
+    if (o.length > 0) {
+      var a = '<h4>Loop detected in playbook</h4>Configuration of loops is not fully supported using the UI.<br/>Custom code may be required for consistent behavior.'
+      this.dispatcher.trigger('notification:clear')
+      this.dispatcher.trigger('notification:show', {
+        message: a,
+        autoHide: !1,
+        type: 'error',
+      })
+    } else {
+      this.dispatcher.trigger('notification:clear')
+      t.set({
+        status: '',
+      })
+    }
   },
   /** ---事件处理-end--- */
 })

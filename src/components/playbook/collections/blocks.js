@@ -28,7 +28,7 @@ export default _bb.Collection.extend({
   },
   clearFilterCollects: function () {
     var t = this.where({
-      type: 'cmChart.Filter',
+      type: 'coa.Filter',
     })
     _.each(t, function (t) {
       t.filter_params = {}
@@ -36,7 +36,7 @@ export default _bb.Collection.extend({
   },
   clearFilterParams: function () {
     var t = this.where({
-      type: 'cmChart.Action',
+      type: 'coa.Action',
     })
     _.each(t, function (t) {
       t.filter_params = {}

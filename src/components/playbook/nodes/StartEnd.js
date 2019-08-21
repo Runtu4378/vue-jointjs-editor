@@ -32,7 +32,7 @@ export const StartEndModel = Model.extend(extend({}, {
 `,
   portMarkup: '<g class="port port<%= id %>"><circle class="port-body"/><text class="port-label"/></g>',
   defaults: defaultsDeep({
-    type: 'cmChart.StartEnd',
+    type: 'coa.StartEnd',
     name: '',
     size: {
       width: startWidth,

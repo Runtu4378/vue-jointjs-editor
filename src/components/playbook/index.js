@@ -23,8 +23,10 @@ export default class PlayBook {
 
   // 初始化backbone上下文的hack
   initBBHack () {
+    const dispatcher = _lo.extend({}, _bb.Events, {
+      cid: 'dispatcher',
+    })
     const playbook = new Playbook()
-
     const blocks = new Blocks()
 
     _lo.each([
@@ -34,6 +36,7 @@ export default class PlayBook {
       _bb.Router.prototype,
     ], function (base) {
       return _lo.extend(base, {
+        dispatcher,
         playbook,
         blocks,
       })

@@ -128,7 +128,7 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
   <text class="port-label"/>
 </g>`,
     defaults: defaultsDeep({
-      type: 'cmChart.Base',
+      type: 'coa.Base',
     }, joint.shapes.devs.Model.prototype.defaults),
 
     initialize: function () {

@@ -12,7 +12,7 @@ export const SelectorModel = joint.shapes.basic.Generic.extend({
 </g>
 `,
   defaults: _lo.defaultsDeep({
-    type: 'cmChart.Selector',
+    type: 'coa.Selector',
     size: {
       width: 40,
       height: 40,

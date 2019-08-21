@@ -14,7 +14,7 @@ export const IntroModel = joint.shapes.basic.Generic.extend({
 </g>
 `,
   defaults: joint.util.deepSupplement({
-    type: 'cmChart.Intro',
+    type: 'coa.Intro',
     size: {
       width: 294,
       height: 108,
