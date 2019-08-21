@@ -413,6 +413,8 @@ export default _bb.View.extend({
     $(e.target).is('circle') && this.removeIntro()
   },
   cellMouseUp: function (t, e, i, n) {
+    console.log(t.model.get('type'))
+    console.log(t.model.get('target'))
     if (t.model.get('type') === 'link') {
       this.dispatcher.trigger('panel:close')
       this.dispatcher.trigger('frame:close')
