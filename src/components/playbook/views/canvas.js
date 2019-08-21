@@ -8,6 +8,8 @@ import {
   defaults,
 } from 'lodash'
 
+import '../jointjs/extend'
+
 import {
   defaultProps,
 } from '../nodes/base'
@@ -15,6 +17,10 @@ import {
   IntroModel,
   IntroView,
 } from '../nodes/Intro'
+import {
+  SelectorModel,
+  SelectorView,
+} from '../nodes/Selector'
 import {
   StartEndModel,
   StartEndView,
@@ -26,6 +32,7 @@ export default _bb.View.extend({
     this.el = `#${id}`
     this.mountNodes()
     this.initJointInstance()
+    this.initSelector()
     this.render()
   },
   render: function () {
@@ -69,6 +76,8 @@ export default _bb.View.extend({
     joint.shapes['cmChart'] = {}
     joint.shapes['cmChart'].Intro = IntroModel
     joint.shapes['cmChart'].IntroView = IntroView
+    joint.shapes['cmChart'].Selector = SelectorModel
+    joint.shapes['cmChart'].SelectorView = SelectorView
     joint.shapes['cmChart'].StartEnd = StartEndModel
     joint.shapes['cmChart'].StartEndView = StartEndView
   },
@@ -145,6 +154,22 @@ export default _bb.View.extend({
       },
       validateMagnet: function (t, e) {
         return e.getAttribute('type') !== 'input'
+      },
+    })
+  },
+  /** 初始化选择器 */
+  initSelector: function () {
+    this.selector = new SelectorModel()
+    this.selection = new joint.ui.Selection({
+      paper: this.paper,
+      filter: ['cmChart.StartEnd'],
+    })
+    this.selection.removeHandle('rotate')
+    this.selection.removeHandle('resize')
+    this.selection.changeHandle('remove', {
+      position: 'ne',
+      events: {
+        pointerdown: null,
       },
     })
   },
