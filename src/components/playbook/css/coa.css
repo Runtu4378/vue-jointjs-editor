@@ -3780,14 +3780,14 @@ textarea:focus {
   color: #5c6773
 }
 
-#stage-container {
+.stage-container {
   width: 100%;
   min-height: 740px;
   overflow: hidden;
   z-index: 5
 }
 
-#stage-container,
+.stage-container,
 .stage {
   position: relative;
   height: calc(100vh - 60px)

@@ -28,7 +28,10 @@ export default _bb.View.extend({
     this.canvasId = canvasId
     this.panelsId = panelsId
 
-    $(`#${mountId}`).append(`
+    $(`#${mountId}`)
+      .addClass('stage-container')
+      .addClass(window.PHANTOM_THEME === 'dark' ? 'dark-theme' : 'light-theme')
+      .append(`
 <div id="${canvasId}" class="cmc-canvas"></div>
 <div id="${panelsId}" class="cmc-panel"></div>
 `)
