@@ -34,6 +34,7 @@ export default _bb.View.extend({
     this.mountNodes()
     this.initJointInstance()
     this.initSelector()
+    this.initEvent()
     this.render()
   },
   render: function () {
@@ -69,7 +70,7 @@ export default _bb.View.extend({
       this.intro = new IntroModel()
       this.intro.position(220, 60)
       this.graph.addCell([this.intro])
-      // $('#paper g.start').addClass('pulse')
+      $(`${this.el} g.start`).addClass('pulse')
     }
   },
   /** 挂载自定义节点 */
@@ -176,4 +177,31 @@ export default _bb.View.extend({
     // this.selection.on('selection-box:pointerdown', _.bind(this.selectionMouseDown, this))
     // this.selection.on('action:remove:pointerdown', _.bind(this.removeSelected, this))
   },
+  /** 初始化事件 */
+  initEvent: function () {
+    this.paper.on('link:connect', this.changeConnection, this)
+  },
+
+  /** ---事件处理-start--- */
+  /** 隐藏提示 */
+  removeIntro: function () {
+    var t = this
+    if (this.intro) {
+      var e = this.paper.findViewByModel(this.intro)
+      $(`${this.el} g.joint-type-coa-intro`).animate({
+        opacity: 0,
+      }, 200, function () {
+        e.remove()
+        t.intro.remove()
+        $(`${this.el} g.start`).removeClass('pulse')
+      })
+    }
+  },
+  changeConnection: function (t) {
+    this.removeIntro()
+    var e = this.graph.getCell(t.model.get('target').id)
+    this.dispatcher.trigger('code:update')
+    this.blockSourceChange(e)
+  },
+  /** ---事件处理-end--- */
 })
