@@ -2,6 +2,7 @@
 
 import _bb from 'backbone'
 import $ from 'jquery'
+import _ from 'underscore'
 import * as joint from 'jointjs'
 import 'jointjs/dist/joint.css'
 import {
@@ -172,5 +173,7 @@ export default _bb.View.extend({
         pointerdown: null,
       },
     })
+    // this.selection.on('selection-box:pointerdown', _.bind(this.selectionMouseDown, this))
+    // this.selection.on('action:remove:pointerdown', _.bind(this.removeSelected, this))
   },
 })
