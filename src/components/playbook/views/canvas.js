@@ -198,6 +198,8 @@ export default _bb.View.extend({
   initEvent: function () {
     this.paper.on('link:connect', this.changeConnection, this)
     this.paper.on('cell:pointerclick', this.cellMouseClick, this)
+    this.paper.on('cell:pointerdown', this.cellMouseDown, this)
+    this.paper.on('cell:pointerup', this.cellMouseUp, this)
     // this.paper.on('blank:pointerdown', this.canvasMouseDown, this)
     // this.paper.on('blank:pointerup', this.canvasMouseUp, this)
     this.paper.on('translate', this.paperTranslate, this)
@@ -406,6 +408,33 @@ export default _bb.View.extend({
       }
     })
     t.outbound = i
+  },
+  cellMouseDown: function (t, e, i, n) {
+    $(e.target).is('circle') && this.removeIntro()
+  },
+  cellMouseUp: function (t, e, i, n) {
+    if (t.model.get('type') === 'link') {
+      this.dispatcher.trigger('panel:close')
+      this.dispatcher.trigger('frame:close')
+      if (!t.model.get('target').id) {
+        this.coa.set('blockX', i + 20)
+        this.selector.position(i + 40, n)
+        this.graph.addCell([this.selector])
+        t.model.set('target', {
+          id: this.selector.id,
+        })
+        this.active_link = t
+        this.dispatcher.trigger('panel:selector')
+      }
+    } else if (
+      this.coa.get('editMode') &&
+      !this.coa.get('resolveOpen') &&
+      (e.ctrlKey || e.metaKey) &&
+      t.model.get('type') !== 'coa.Intro'
+    ) {
+      this.selection.collection.add(t.model)
+      t.cellOut()
+    }
   },
   changeConnection: function (t) {
     this.removeIntro()
