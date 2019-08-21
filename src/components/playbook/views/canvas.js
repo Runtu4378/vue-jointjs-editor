@@ -197,9 +197,11 @@ export default _bb.View.extend({
   /** 初始化事件 */
   initEvent: function () {
     this.paper.on('link:connect', this.changeConnection, this)
+    this.paper.on('cell:pointerclick', this.cellMouseClick, this)
     // this.paper.on('blank:pointerdown', this.canvasMouseDown, this)
     // this.paper.on('blank:pointerup', this.canvasMouseUp, this)
     this.paper.on('translate', this.paperTranslate, this)
+    this.dispatcher.on('panel:close', this.resetSelection, this)
   },
 
   /** ---事件处理-start--- */
@@ -278,6 +280,132 @@ export default _bb.View.extend({
         $(`${this.el} g.start`).removeClass('pulse')
       })
     }
+  },
+  cellMouseClick: function (t, e) {
+    var i = this.blocks.getActive()
+    this.dispatcher.trigger('body:click')
+    this.clearSelector()
+    if (t.model !== i) {
+      this.resetSelection()
+      if (
+        !e.metaKey &&
+        t.model &&
+        t.model.get('type') !== 'link'
+      ) {
+        this.coa.set('blockX', t.model.position().x)
+        this.coa.set('actionSelectState', t.model.get('state'))
+        this.coa.set('codeView', 'block')
+        this.collectBlockData(t.model)
+        t.model.set('active', true)
+        this.removeIntro()
+      }
+      t.model.toFront()
+    }
+  },
+  resetSelection: function () {
+    this.dispatcher.trigger('header:close')
+    if (this.blocks.getActive()) {
+      _.each(this.blocks.models, function (t) {
+        t.set({
+          active: false,
+        })
+      })
+      setTimeout(this.validateBlockConfig.bind(this), 500)
+    }
+  },
+  collectBlockData: function (t) {
+    this.getSourceInputs(t)
+    this.findBlockOutputs(t)
+    this.getMenuData(t)
+  },
+  // TODO
+  getMenuData: function (t) {
+    var e = this
+    var i = this.graph.getPredecessors(t, {
+      breadthFirst: true,
+    })
+    var n = _.filter(i, function (t) {
+      return t.get('type') === 'coa.StartEnd'
+    })
+    var s = n.length > 0
+    var o = []
+    if (s) {
+      var a = n[0].getMenuData(t, e.graph)
+      o = o.concat(a)
+    }
+    if (
+      t.get('type') === 'coa.Filter' ||
+      t.get('type') === 'coa.Decision'
+    ) {
+      let a = this.getCustomListMenu()
+      o = o.concat(a)
+      a = this.getDateTimeMenu()
+      o = o.concat(a)
+    }
+    _.each(i.reverse(), function (i, n) {
+      if (i.get('type') !== 'coa.StartEnd') {
+        var s = i.getMenuData(t, e.graph)
+        s.length > 0 && (o = o.concat(s))
+      }
+    })
+    t.set({
+      connected_to_start: s,
+      parameters: o.reverse(),
+    })
+  },
+  getSourceInputs: function (t) {
+    var e = this
+    var i = this.graph.getNeighbors(t, {
+      inbound: true,
+    })
+    var n = ''
+    var s = ''
+    var o = {
+      names: [],
+      callbacks: [],
+      functions: [],
+    }
+    _.each(i, function (t) {
+      var i = e.findBlockSource(t)
+      o.names = o.names.concat(i.names)
+      o.callbacks = o.callbacks.concat(i.callbacks)
+      o.functions = o.functions.concat(i.functions)
+    })
+    if (o.names.length > 0) {
+      n = o.names.length === 1 && o.names[0] === 'start'
+        ? 'object'
+        : 'action'
+      s = o.names.join(', ')
+    }
+    o.callbacks = _.compact(o.callbacks)
+    o.functions = _.compact(o.functions)
+    t.set({
+      connection_type: n,
+      connection_name: s,
+    })
+    t.inbound = o.functions
+    t.inCount = i.length
+    i.length === 1 && t.get('type') === 'coa.Action' && i[0].get('type') === 'coa.Action' && (t.parent_action = true)
+  },
+  findBlockOutputs: function (t) {
+    var e = this.graph.getConnectedLinks(t, {
+      outbound: true,
+    })
+    var i = []
+    _.each(e, function (t) {
+      var e = t.getTargetElement()
+      if (
+        e !== null &&
+        e.get('type') !== 'coa.Selector'
+      ) {
+        var n = {
+          function_name: e.getCallbackName(),
+          port: t.get('source').port,
+        }
+        n.function_name !== null && i.push(n)
+      }
+    })
+    t.outbound = i
   },
   changeConnection: function (t) {
     this.removeIntro()
