@@ -36,7 +36,7 @@ const template = `
   </div>
 </div>
 <div id="<%= notificationsId %>" class="cmc-notifications"></div>
-<div id="<%= loaderId %>" class="cmc-loader">
+<div id="<%= loaderId %>" class="cmc-loader hidden">
   <div class="message">
     <div class="loader"></div>
     <div class="title">Loading Phantom Playbook Editor</div>
@@ -72,7 +72,7 @@ export default _bb.View.extend({
 
     // 插入占位节点
     $(this.el).html(this.template({
-      theme: window.PHANTOM_THEME,
+      theme: defaultProps.theme,
       headerId,
       rightPanelId,
       stageContainerId,

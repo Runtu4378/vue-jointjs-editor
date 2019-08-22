@@ -1,5 +1,4 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
-/* globals PLAYBOOK_THEME */
 
 import {
   defaultsDeep,
@@ -170,7 +169,7 @@ export const ActionModel = Model.extend(extend({}, {
         },
       },
       'g.approver image': {
-        xlinkHref: `${defaultProps.imgPrefix}/block_icon_approver_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_approver_${defaultProps.theme}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 11,
@@ -178,7 +177,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 16,
       },
       'g.timer image': {
-        xlinkHref: `${defaultProps.imgPrefix}/block_icon_delay_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_delay_${defaultProps.theme}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 35,
@@ -186,7 +185,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 15,
       },
       'g.code image': {
-        xlinkHref: `${defaultProps.imgPrefix}/block_icon_code_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_code_${defaultProps.theme}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 58,
@@ -194,7 +193,7 @@ export const ActionModel = Model.extend(extend({}, {
         height: 13,
       },
       'g.notes image': {
-        xlinkHref: `${defaultProps.imgPrefix}/block_icon_note_${PLAYBOOK_THEME}_off.svg`,
+        xlinkHref: `${defaultProps.imgPrefix}/block_icon_note_${defaultProps.theme}_off.svg`,
         ref: '.background',
         refY: 78,
         refX: 85,
