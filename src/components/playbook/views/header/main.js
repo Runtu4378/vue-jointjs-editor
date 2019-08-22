@@ -2,12 +2,14 @@
 
 import _bb from 'backbone'
 import _ from 'underscore'
+import $ from 'jquery'
 
+import { defaultProps } from '../../nodes/base'
 import Input from '../../widgets/input'
 import Button from '../../widgets/button'
 
 const template = `<div class="top">
-  <div class="logo"><a target="_blank" href="/"><img src="/inc/phantom/img/splunk-phantom-logo.svg"/></a></div>
+  <div class="logo"><a target="_blank" href="/"><img src="${defaultProps.imgPrefix}/splunk-phantom-logo.svg"/></a></div>
   <div class="inputs"></div>
   <div class="action"></div>
   <div class="repo">
@@ -26,7 +28,6 @@ const template = `<div class="top">
 `
 
 export default _bb.View.extend({
-  el: '#header',
   events: {
     'click .zoom-plus': 'zoomIn',
     'click .zoom-minus': 'zoomOut',
@@ -34,7 +35,9 @@ export default _bb.View.extend({
     'click .history': 'showHistory',
     'click .missing-assets': 'showMapper',
   },
-  initialize: function () {
+  initialize: function (id) {
+    this.el = `#${id}`
+    this.$el = $(this.el)
     this.nameInput = null
     this.action = null
     this.buttonWidget = null
@@ -77,17 +80,17 @@ export default _bb.View.extend({
     this.cancelWidget = new Button({
       style: 'btn-secondary',
     })
-    this.settingsWidget = new Button({
-      style: 'btn-secondary settings',
-    })
+    // this.settingsWidget = new Button({
+    //   style: 'btn-secondary settings',
+    // })
     this.cancelWidget.label = 'Cancel'
     this.cancelWidget.action = 'playbook:cancel'
-    this.settingsWidget.label = 'Playbook Settings'
-    this.settingsWidget.action = 'playbook:settings'
+    // this.settingsWidget.label = 'Playbook Settings'
+    // this.settingsWidget.action = 'playbook:settings'
     this.$el.find('.action').append(
       this.buttonWidget.render().el,
       this.cancelWidget.render().el,
-      this.settingsWidget.render().el
+      // this.settingsWidget.render().el
     )
     this.cancelWidget.hide()
     // this.panel.render()

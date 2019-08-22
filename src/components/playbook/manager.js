@@ -96,7 +96,7 @@ export default _bb.View.extend({
   },
   render: function () {
     const mountId = this.mountId
-    this.header = new Header()
+    this.header = new Header(this.headerId)
     this.canvas = new Canvas(mountId, this.paperId)
     this.panels = new Panels({
       id: this.panelId,
