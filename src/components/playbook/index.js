@@ -7,6 +7,7 @@ import Manager from './manager'
 
 import Playbook from './models/playbook'
 import Coa from './models/coa'
+import CoaSetting from './models/coa_settings'
 
 import Blocks from './collections/blocks'
 
@@ -29,6 +30,8 @@ export default class PlayBook {
     })
     const playbook = new Playbook()
     const coa = new Coa()
+    /* eslint-disable-next-line */
+    const coa_settings = new CoaSetting()
     const blocks = new Blocks()
 
     _lo.each([
@@ -41,6 +44,7 @@ export default class PlayBook {
         dispatcher,
         playbook,
         coa,
+        coa_settings,
         blocks,
       })
     })

@@ -132,6 +132,7 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
     }, joint.shapes.devs.Model.prototype.defaults),
 
     initialize: function () {
+      this.menuData = []
       joint.shapes.basic.PortsModelInterface.initialize.apply(this, arguments)
     },
 
@@ -151,6 +152,10 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
         refX: (e + 0.5) * (1 / length),
       }
       return attrs
+    },
+
+    getMenuData: function (t, e) {
+      return this.menuData
     },
   },
 ))

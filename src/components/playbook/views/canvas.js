@@ -22,10 +22,15 @@ import {
   SelectorModel,
   SelectorView,
 } from '../nodes/Selector'
+
 import {
   StartEndModel,
   StartEndView,
 } from '../nodes/StartEnd'
+import {
+  ActionModel,
+  ActionView,
+} from '../nodes/Action'
 
 export default _bb.View.extend({
   el: '',
@@ -43,6 +48,7 @@ export default _bb.View.extend({
     this.mountNodes()
     this.initJointInstance()
     this.initSelector()
+    this.initAddBlockFunctions()
     this.initEvent()
     this.render()
   },
@@ -97,8 +103,11 @@ export default _bb.View.extend({
     joint.shapes['coa'].IntroView = IntroView
     joint.shapes['coa'].Selector = SelectorModel
     joint.shapes['coa'].SelectorView = SelectorView
+
     joint.shapes['coa'].StartEnd = StartEndModel
     joint.shapes['coa'].StartEndView = StartEndView
+    joint.shapes['coa'].Action = ActionModel
+    joint.shapes['coa'].ActionView = ActionView
   },
   /** 初始化jointjs实例 */
   initJointInstance: function () {
@@ -204,6 +213,57 @@ export default _bb.View.extend({
     // this.paper.on('blank:pointerup', this.canvasMouseUp, this)
     this.paper.on('translate', this.paperTranslate, this)
     this.dispatcher.on('panel:close', this.resetSelection, this)
+    this.dispatcher.on('block:add', this.addBlock, this)
+  },
+  /** 初始化节点添加函数 */
+  initAddBlockFunctions: function () {
+    this.addBlockFunctions = {
+      // filter: _.bind(this.addFilter, this),
+      action: _.bind(this.addAction, this),
+    }
+  },
+
+  /** 节点添加-start */
+  addAction: function () {
+    var t = new ActionModel()
+    var e = this.coa.get('actionSelectMode') === 'apps'
+      ? 'apps'
+      : 'actions'
+    this.coa.set('actionSelectState', e)
+    this._addBlock(t)
+    t.set({
+      active: true,
+      state: e,
+    })
+  },
+  /** 节点添加-end */
+
+  addBlock: function (t) {
+    if (
+      this.addBlockFunctions.hasOwnProperty(t) &&
+      this.addBlockFunctions[t]
+    ) {
+      this.addBlockFunctions[t]()
+      this.dispatcher.trigger('playbook:change:code')
+    } else {
+      console.log('Block type "' + t + '" not implemented.')
+    }
+  },
+  _addBlock: function (t) {
+    var e = this.selector.get('position')
+    t.position(e.x, e.y - 40)
+    this.blocks.getActiveId() && this.resetSelection()
+    this.blocks.push(t)
+    this.graph.addCell([t])
+    this.active_link && this.active_link.model.set('target', {
+      id: t.id,
+      selector: '.port-body[type="input"]',
+    })
+    var i = this.blocks.length
+    t.set('order', i - 1)
+    this.endBlock.set('order', i)
+    this.collectBlockData(t)
+    this.clearSelector()
   },
 
   /** ---事件处理-start--- */
@@ -388,6 +448,32 @@ export default _bb.View.extend({
     t.inbound = o.functions
     t.inCount = i.length
     i.length === 1 && t.get('type') === 'coa.Action' && i[0].get('type') === 'coa.Action' && (t.parent_action = true)
+  },
+  findBlockSource: function (t) {
+    var e = this
+    t.get('type')
+    if (t.get('callsback')) {
+      return {
+        names: t.getBlockName(),
+        callbacks: t.getCallbackName(),
+        functions: t.getFunctionName(),
+      }
+    }
+    var i = this.graph.getNeighbors(t, {
+      inbound: true,
+    })
+    var n = {
+      names: [],
+      callbacks: [],
+      functions: [],
+    }
+    _.each(i, function (t) {
+      var i = e.findBlockSource(t)
+      n.names = n.names.concat(i.names)
+      n.callbacks = n.callbacks.concat(i.callbacks)
+      n.functions = n.functions.concat(i.functions)
+    })
+    return n
   },
   findBlockOutputs: function (t) {
     var e = this.graph.getConnectedLinks(t, {
