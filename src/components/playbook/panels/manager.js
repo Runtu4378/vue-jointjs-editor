@@ -1,7 +1,7 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
 import _bb from 'backbone'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 import Drawer from './drawer'
 import Selector from './selector'

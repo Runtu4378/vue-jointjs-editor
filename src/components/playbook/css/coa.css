@@ -30,7 +30,7 @@ ul {
   overflow: hidden
 }
 
-#loader {
+.cmc-loader {
   position: fixed;
   top: 60px;
   left: 0;
@@ -40,15 +40,15 @@ ul {
   z-index: 500
 }
 
-.light-theme #loader {
+.light-theme .cmc-loader {
   background-color: #f7f8fa
 }
 
-.dark-theme #loader {
+.dark-theme .cmc-loader {
   background-color: #000
 }
 
-#loader .message {
+.cmc-loader .message {
   position: relative;
   display: inline-block;
   margin-top: 80px;
@@ -59,36 +59,36 @@ ul {
   line-height: 20px
 }
 
-.light-theme #loader .message {
+.light-theme .cmc-loader .message {
   color: #000
 }
 
-.dark-theme #loader .message {
+.dark-theme .cmc-loader .message {
   color: #fff
 }
 
-#loader .message .title {
+.cmc-loader .message .title {
   margin-bottom: 10px
 }
 
-#loader .status {
+.cmc-loader .status {
   font-size: 14px;
   font-weight: 300
 }
 
-.light-theme #loader .status {
+.light-theme .cmc-loader .status {
   color: #818d99
 }
 
-.dark-theme #loader .status {
+.dark-theme .cmc-loader .status {
   color: #e1e6eb
 }
 
-#loader .loading {
+.cmc-loader .loading {
   margin-top: 2px
 }
 
-#loader .error {
+.cmc-loader .error {
   margin-top: 20px;
   font-size: 14px
 }
@@ -214,7 +214,7 @@ ul {
   border-top-color: #007abd
 }
 
-#frames {
+.cmc-frames {
   position: fixed;
   top: 100vh;
   width: 100%;
@@ -222,7 +222,7 @@ ul {
   z-index: 8
 }
 
-#frames.open {
+.cmc-frames.open {
   position: absolute;
   top: calc(50% + 5px);
   bottom: 0;
@@ -231,14 +231,14 @@ ul {
   z-index: 10
 }
 
-#frames.full {
+.cmc-frames.full {
   position: absolute;
   top: 60px;
   height: calc(100% - 60px)
 }
 
 @media (max-width:1414px) {
-  #frames {
+  .cmc-frames {
     top: calc(100vh - 10px)
   }
 }
@@ -873,7 +873,7 @@ textarea:focus {
   outline: none
 }
 
-#header {
+.cmc-header {
   left: -5px;
   padding-left: 5px;
   width: calc(100% + 5px);
@@ -881,58 +881,58 @@ textarea:focus {
   box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5)
 }
 
-#header,
-#header .top {
+.cmc-header,
+.cmc-header .top {
   position: relative;
   height: 60px;
   z-index: 10
 }
 
-#header .top {
+.cmc-header .top {
   width: 100%
 }
 
-.dark-theme #header .top,
-.light-theme #header .top {
+.dark-theme .cmc-header .top,
+.light-theme .cmc-header .top {
   background-color: #171d21
 }
 
-.dark-theme #header .top .btn-secondary,
-.light-theme #header .top .btn-secondary {
+.dark-theme .cmc-header .top .btn-secondary,
+.light-theme .cmc-header .top .btn-secondary {
   border: 1px solid #3c444d;
   background-color: #3c444d;
   color: #fff
 }
 
-.dark-theme #header .top .btn-secondary:hover,
-.light-theme #header .top .btn-secondary:hover {
+.dark-theme .cmc-header .top .btn-secondary:hover,
+.light-theme .cmc-header .top .btn-secondary:hover {
   border: 1px solid #5c6773;
   background-color: #5c6773
 }
 
-.dark-theme #header .top .btn-secondary.disabled,
-.dark-theme #header .top .btn-secondary.disabled:hover,
-.light-theme #header .top .btn-secondary.disabled,
-.light-theme #header .top .btn-secondary.disabled:hover {
+.dark-theme .cmc-header .top .btn-secondary.disabled,
+.dark-theme .cmc-header .top .btn-secondary.disabled:hover,
+.light-theme .cmc-header .top .btn-secondary.disabled,
+.light-theme .cmc-header .top .btn-secondary.disabled:hover {
   border: 1px solid #2a3139;
   background-color: #2a3139;
   color: #fff;
   cursor: not-allowed
 }
 
-#header .logo {
+.cmc-header .logo {
   float: left;
   height: 60px;
   margin-left: 20px;
   margin-right: 20px
 }
 
-#header .logo img {
+.cmc-header .logo img {
   width: 140px;
   height: 60px
 }
 
-#header .inputs {
+.cmc-header .inputs {
   position: relative;
   float: left;
   margin-left: 10px;
@@ -940,43 +940,43 @@ textarea:focus {
   z-index: 8
 }
 
-#header.fullscreen {
+.cmc-header.fullscreen {
   z-index: auto
 }
 
-#header .action {
+.cmc-header .action {
   position: relative;
   float: right;
   margin: 15px 20px 0 0
 }
 
-#header .action>div {
+.cmc-header .action>div {
   float: right;
   margin-left: 20px
 }
 
-#header .action>div.disabled {
+.cmc-header .action>div.disabled {
   opacity: .3
 }
 
-#header .action .settings,
-#header .repo {
+.cmc-header .action .settings,
+.cmc-header .repo {
   margin-right: 20px
 }
 
-#header .repo {
+.cmc-header .repo {
   position: relative;
   float: right
 }
 
-#header .repo .repo-name {
+.cmc-header .repo .repo-name {
   line-height: 60px;
   font-size: 14px;
   font-weight: 300;
   color: #fff
 }
 
-#header .missing-assets {
+.cmc-header .missing-assets {
   display: none;
   float: right;
   margin: 15px 40px 15px 0;
@@ -989,47 +989,47 @@ textarea:focus {
   cursor: pointer
 }
 
-#header .missing-assets i.fa {
+.cmc-header .missing-assets i.fa {
   margin-right: 5px
 }
 
-#header .canvas-controls {
+.cmc-header .canvas-controls {
   position: absolute;
   top: 68px;
   right: 22px;
   width: 200px
 }
 
-#header .canvas-controls div {
+.cmc-header .canvas-controls div {
   float: right;
   line-height: 28px
 }
 
-#header .canvas-controls div.zoom-level {
+.cmc-header .canvas-controls div.zoom-level {
   font-size: 14px;
   font-weight: 500
 }
 
-.light-theme #header .canvas-controls div.zoom-level {
+.light-theme .cmc-header .canvas-controls div.zoom-level {
   color: #000
 }
 
-.dark-theme #header .canvas-controls div.zoom-level {
+.dark-theme .cmc-header .canvas-controls div.zoom-level {
   color: #fff
 }
 
-#header .canvas-controls div.zoom-fit {
+.cmc-header .canvas-controls div.zoom-fit {
   margin-right: 10px;
   cursor: pointer
 }
 
-#header .canvas-controls div i.fa {
+.cmc-header .canvas-controls div i.fa {
   line-height: 28px
 }
 
-#header .canvas-controls .zoom-fit,
-#header .canvas-controls .zoom-minus,
-#header .canvas-controls .zoom-plus {
+.cmc-header .canvas-controls .zoom-fit,
+.cmc-header .canvas-controls .zoom-minus,
+.cmc-header .canvas-controls .zoom-plus {
   height: 28px;
   width: 28px;
   margin-left: 10px;
@@ -1039,28 +1039,28 @@ textarea:focus {
   border-radius: 2px
 }
 
-.light-theme #header .canvas-controls .zoom-fit,
-.light-theme #header .canvas-controls .zoom-minus,
-.light-theme #header .canvas-controls .zoom-plus {
+.light-theme .cmc-header .canvas-controls .zoom-fit,
+.light-theme .cmc-header .canvas-controls .zoom-minus,
+.light-theme .cmc-header .canvas-controls .zoom-plus {
   background-color: #fff;
   color: #5c6773
 }
 
-.dark-theme #header .canvas-controls .zoom-fit,
-.dark-theme #header .canvas-controls .zoom-minus,
-.dark-theme #header .canvas-controls .zoom-plus {
+.dark-theme .cmc-header .canvas-controls .zoom-fit,
+.dark-theme .cmc-header .canvas-controls .zoom-minus,
+.dark-theme .cmc-header .canvas-controls .zoom-plus {
   background-color: #3c444d;
   color: #fff
 }
 
-#header .input-widget {
+.cmc-header .input-widget {
   width: 335px;
   height: 60px;
   margin: 0;
   padding: 0
 }
 
-#header .input-widget input {
+.cmc-header .input-widget input {
   width: 100%;
   height: 30px;
   margin: 10px 0;
@@ -1068,59 +1068,59 @@ textarea:focus {
   font-size: 16px
 }
 
-.light-theme #header .input-widget input {
+.light-theme .cmc-header .input-widget input {
   background-color: transparent;
   border: 1px solid #5c6773;
   color: #fff
 }
 
-.dark-theme #header .input-widget input {
+.dark-theme .cmc-header .input-widget input {
   background-color: transparent;
   border: 1px solid #3c444d;
   color: #fff
 }
 
-#header .input-widget input::-webkit-input-placeholder {
+.cmc-header .input-widget input::-webkit-input-placeholder {
   font-weight: 300
 }
 
-#header .input-widget input:-ms-input-placeholder,
-#header .input-widget input::-ms-input-placeholder {
+.cmc-header .input-widget input:-ms-input-placeholder,
+.cmc-header .input-widget input::-ms-input-placeholder {
   font-weight: 300
 }
 
-#header .input-widget input::placeholder {
+.cmc-header .input-widget input::placeholder {
   font-weight: 300
 }
 
-.light-theme #header .input-widget input::-webkit-input-placeholder {
+.light-theme .cmc-header .input-widget input::-webkit-input-placeholder {
   color: #818d99
 }
 
-.light-theme #header .input-widget input:-ms-input-placeholder,
-.light-theme #header .input-widget input::-ms-input-placeholder {
+.light-theme .cmc-header .input-widget input:-ms-input-placeholder,
+.light-theme .cmc-header .input-widget input::-ms-input-placeholder {
   color: #818d99
 }
 
-.light-theme #header .input-widget input::placeholder {
+.light-theme .cmc-header .input-widget input::placeholder {
   color: #818d99
 }
 
-.dark-theme #header .input-widget input::-webkit-input-placeholder {
+.dark-theme .cmc-header .input-widget input::-webkit-input-placeholder {
   color: #f2f4f5
 }
 
-.dark-theme #header .input-widget input:-ms-input-placeholder,
-.dark-theme #header .input-widget input::-ms-input-placeholder {
+.dark-theme .cmc-header .input-widget input:-ms-input-placeholder,
+.dark-theme .cmc-header .input-widget input::-ms-input-placeholder {
   color: #f2f4f5
 }
 
-.dark-theme #header .input-widget input::placeholder {
+.dark-theme .cmc-header .input-widget input::placeholder {
   color: #f2f4f5
 }
 
-.dark-theme #header .input-widget.error input,
-.light-theme #header .input-widget.error input {
+.dark-theme .cmc-header .input-widget.error input,
+.light-theme .cmc-header .input-widget.error input {
   border: 1px solid #dc4e41
 }
 
@@ -4458,14 +4458,14 @@ textarea:focus {
   color: #5c6773
 }
 
-.stage-container {
+.cmc-stage-container {
   width: 100%;
   min-height: 740px;
   overflow: hidden;
   z-index: 5
 }
 
-.stage-container,
+.cmc-stage-container,
 .stage {
   position: relative;
   height: calc(100vh - 60px)
@@ -4505,7 +4505,7 @@ textarea:focus {
   display: block
 }
 
-.cmc-canvas {
+.cmc-paper {
   float: left;
   position: relative;
   width: 100vw;
@@ -4515,49 +4515,49 @@ textarea:focus {
   z-index: 5
 }
 
-.light-theme .cmc-canvas {
+.light-theme .cmc-paper {
   background-color: #f7f8fa
 }
 
-.dark-theme .cmc-canvas {
+.dark-theme .cmc-paper {
   background-color: #000
 }
 
-.cmc-canvas .joint-link.joint-theme-default .connection,
-.cmc-canvas .joint-link.joint-theme-default .connection-wrap,
-.cmc-canvas rect.border {
+.cmc-paper .joint-link.joint-theme-default .connection,
+.cmc-paper .joint-link.joint-theme-default .connection-wrap,
+.cmc-paper rect.border {
   pointer-events: none
 }
 
-.cmc-canvas .delete,
-.cmc-canvas [magnet=true]:not(.element) {
+.cmc-paper .delete,
+.cmc-paper [magnet=true]:not(.element) {
   cursor: pointer
 }
 
-.cmc-canvas.disabled .delete {
+.cmc-paper.disabled .delete {
   cursor: auto
 }
 
-.cmc-canvas.disabled .joint-link.joint-theme-default .connection-wrap:hover {
+.cmc-paper.disabled .joint-link.joint-theme-default .connection-wrap:hover {
   opacity: 0;
   cursor: auto
 }
 
-.cmc-canvas.disabled .joint-link.joint-theme-default .link-tools,
-.cmc-canvas .joint-link .marker-arrowheads {
+.cmc-paper.disabled .joint-link.joint-theme-default .link-tools,
+.cmc-paper .joint-link .marker-arrowheads {
   display: none
 }
 
-.light-theme .cmc-canvas .link-tools .tool-remove circle {
+.light-theme .cmc-paper .link-tools .tool-remove circle {
   fill: #818d99
 }
 
-.dark-theme .cmc-canvas .link-tools .tool-remove circle {
+.dark-theme .cmc-paper .link-tools .tool-remove circle {
   fill: #3c444d
 }
 
-.dark-theme .cmc-canvas text.number,
-.light-theme .cmc-canvas text.number {
+.dark-theme .cmc-paper text.number,
+.light-theme .cmc-paper text.number {
   fill: #818d99
 }
 
@@ -4725,8 +4725,8 @@ text.title {
   cursor: pointer
 }
 
-#editor,
-#frames.full #editor.open {
+.cmc-editor,
+.cmc-frames.full .cmc-editor.open {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -4734,41 +4734,41 @@ text.title {
   box-shadow: -1px -1px 3px 1px rgba(0, 0, 0, .1)
 }
 
-#frames.full.horz #editor.open {
+.cmc-frames.full.horz .cmc-editor.open {
   width: 100%;
   height: calc(50% - 8px);
   top: 0
 }
 
-#frames.full #editor {
+.cmc-frames.full .cmc-editor {
   bottom: 0;
   height: 0;
   z-index: 11
 }
 
-#frames.full.vert #editor.open,
-#frames.vert #editor {
+.cmc-frames.full.vert .cmc-editor.open,
+.cmc-frames.vert .cmc-editor {
   width: calc(50% - 8px);
   left: 0
 }
 
-#frames .slider {
+.cmc-frames .slider {
   cursor: move;
   cursor: grab;
   cursor: -webkit-grab
 }
 
-.dark-theme #frames .slider,
-.light-theme #frames .slider {
+.dark-theme .cmc-frames .slider,
+.light-theme .cmc-frames .slider {
   background-color: #818d99
 }
 
-#frames .slider:active {
+.cmc-frames .slider:active {
   cursor: grabbing;
   cursor: -webkit-grabbing
 }
 
-#frames.horz .slider {
+.cmc-frames.horz .slider {
   position: absolute;
   bottom: -8px;
   left: 0;
@@ -4777,18 +4777,18 @@ text.title {
   text-align: center
 }
 
-#frames.horz .slider .grabber {
+.cmc-frames.horz .slider .grabber {
   margin-top: -3px;
   font-size: 11px;
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg)
 }
 
-#frames.vert .editor-tab {
+.cmc-frames.vert .editor-tab {
   right: 40px
 }
 
-#frames.vert .slider {
+.cmc-frames.vert .slider {
   position: absolute;
   top: 0;
   right: -8px;
@@ -4797,7 +4797,7 @@ text.title {
   padding-top: 50%
 }
 
-#frames.vert .slider .grabber {
+.cmc-frames.vert .slider .grabber {
   font-size: 10px
 }
 
@@ -4805,7 +4805,7 @@ text.title {
   display: none
 }
 
-#frames.full #editor.open .editor-tab,
+.cmc-frames.full .cmc-editor.open .editor-tab,
 .editor-tab {
   position: absolute;
   top: -38px;
@@ -4850,14 +4850,14 @@ text.title {
   color: #c3cbd4
 }
 
-#frames.full #editor .editor-tab {
+.cmc-frames.full .cmc-editor .editor-tab {
   position: fixed;
   top: auto;
   bottom: 0;
   right: 40px
 }
 
-#frames.full #editor.open .editor-content,
+.cmc-frames.full .cmc-editor.open .editor-content,
 .editor-content {
   position: relative;
   display: block;
@@ -4866,14 +4866,14 @@ text.title {
   overflow: hidden
 }
 
-.dark-theme #frames.full #editor.open .editor-content,
+.dark-theme .cmc-frames.full .cmc-editor.open .editor-content,
 .dark-theme .editor-content,
-.light-theme #frames.full #editor.open .editor-content,
+.light-theme .cmc-frames.full .cmc-editor.open .editor-content,
 .light-theme .editor-content {
   background-color: #2a3139
 }
 
-#frames.full #editor .editor-content {
+.cmc-frames.full .cmc-editor .editor-content {
   display: none
 }
 
@@ -5144,8 +5144,8 @@ text.title {
   color: #f8be34
 }
 
-#debugger,
-#frames.full #debugger.open {
+.cmc-debugger,
+.cmc-frames.full .cmc-debugger.open {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -5153,29 +5153,29 @@ text.title {
   box-shadow: -1px -1px 3px 1px rgba(0, 0, 0, .1)
 }
 
-#debugger.open {
+.cmc-debugger.open {
   z-index: 10
 }
 
-#frames.full #debugger {
+.cmc-frames.full .cmc-debugger {
   bottom: 0;
   height: 0;
   z-index: 10
 }
 
-#frames.full.vert #debugger.open,
-#frames.vert #debugger {
+.cmc-frames.full.vert .cmc-debugger.open,
+.cmc-frames.vert .cmc-debugger {
   width: 50%;
   right: 0
 }
 
-#frames.full.horz #debugger.open {
+.cmc-frames.full.horz .cmc-debugger.open {
   width: 100%;
   height: 50%;
   bottom: 0
 }
 
-#frames.full #debugger.open .debug-tab,
+.cmc-frames.full .cmc-debugger.open .debug-tab,
 .debug-tab {
   position: absolute;
   top: -38px;
@@ -5220,27 +5220,27 @@ text.title {
   color: #c3cbd4
 }
 
-#frames.full #debugger .debug-tab {
+.cmc-frames.full .cmc-debugger .debug-tab {
   position: fixed;
   top: auto;
   bottom: 0
 }
 
-#frames.full #debugger.open .debug-content,
+.cmc-frames.full .cmc-debugger.open .debug-content,
 .debug-content {
   display: block;
   width: 100%;
   height: 100%
 }
 
-.dark-theme #frames.full #debugger.open .debug-content,
+.dark-theme .cmc-frames.full .cmc-debugger.open .debug-content,
 .dark-theme .debug-content,
-.light-theme #frames.full #debugger.open .debug-content,
+.light-theme .cmc-frames.full .cmc-debugger.open .debug-content,
 .light-theme .debug-content {
   background-color: #3c444d
 }
 
-#frames.full #debugger .debug-content {
+.cmc-frames.full .cmc-debugger .debug-content {
   display: none
 }
 
@@ -5641,32 +5641,32 @@ input.containerId {
   font-size: 18px
 }
 
-.dark-theme #frames ::-webkit-scrollbar-track,
-.light-theme #frames ::-webkit-scrollbar-track {
+.dark-theme .cmc-frames ::-webkit-scrollbar-track,
+.light-theme .cmc-frames ::-webkit-scrollbar-track {
   background-color: #3c444d
 }
 
-#frames ::-webkit-scrollbar {
+.cmc-frames ::-webkit-scrollbar {
   width: 8px;
   height: 8px
 }
 
-.dark-theme #frames ::-webkit-scrollbar,
-.light-theme #frames ::-webkit-scrollbar {
+.dark-theme .cmc-frames ::-webkit-scrollbar,
+.light-theme .cmc-frames ::-webkit-scrollbar {
   background-color: #3c444d
 }
 
-#frames ::-webkit-scrollbar-thumb {
+.cmc-frames ::-webkit-scrollbar-thumb {
   border-radius: 4px
 }
 
-.dark-theme #frames ::-webkit-scrollbar-thumb,
-.light-theme #frames ::-webkit-scrollbar-thumb {
+.dark-theme .cmc-frames ::-webkit-scrollbar-thumb,
+.light-theme .cmc-frames ::-webkit-scrollbar-thumb {
   background-color: #5c6773
 }
 
-.dark-theme #frames ::-webkit-scrollbar-corner,
-.light-theme #frames ::-webkit-scrollbar-corner {
+.dark-theme .cmc-frames ::-webkit-scrollbar-corner,
+.light-theme .cmc-frames ::-webkit-scrollbar-corner {
   background-color: #3c444d
 }
 
@@ -6847,7 +6847,7 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   border: 1px solid #dc4e41
 }
 
-#notifications .close,
+.cmc-notifications .close,
 .modal .close {
   position: absolute;
   top: -13px;
@@ -6859,18 +6859,18 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   cursor: pointer
 }
 
-.light-theme #notifications .close,
+.light-theme .cmc-notifications .close,
 .light-theme .modal .close {
   background-color: #3c444d
 }
 
-.dark-theme #notifications .close,
+.dark-theme .cmc-notifications .close,
 .dark-theme .modal .close {
   background-color: #818d99
 }
 
-#notifications .close:after,
-#notifications .close:before,
+.cmc-notifications .close:after,
+.cmc-notifications .close:before,
 .modal .close:after,
 .modal .close:before {
   content: "";
@@ -6886,13 +6886,13 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   transform: rotate(45deg)
 }
 
-#notifications .close:after,
+.cmc-notifications .close:after,
 .modal .close:after {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg)
 }
 
-#notifications {
+.cmc-notifications {
   position: absolute;
   text-align: center;
   top: 60px;
@@ -6900,11 +6900,11 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   z-index: 200
 }
 
-#notifications h4 {
+.cmc-notifications h4 {
   font-weight: 500
 }
 
-#notifications .message {
+.cmc-notifications .message {
   position: relative;
   left: -50%;
   width: 412px;
@@ -6917,30 +6917,30 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   border-radius: 2px
 }
 
-.light-theme #notifications .message {
+.light-theme .cmc-notifications .message {
   background-color: #fff;
   border: 1px solid #c3cbd4;
   color: #3c444d
 }
 
-.dark-theme #notifications .message {
+.dark-theme .cmc-notifications .message {
   background-color: #171d21;
   border: 1px solid #5c6773;
   color: #f2f4f5
 }
 
-#notifications ul {
+.cmc-notifications ul {
   margin: 5px 2px;
   list-style: none
 }
 
-#notifications ul li {
+.cmc-notifications ul li {
   padding-left: 18px;
   font-size: 14px;
   line-height: 24px
 }
 
-#notifications ul i.fa {
+.cmc-notifications ul i.fa {
   font-size: 12px;
   margin: 2px 5px 2px -18px;
   color: #f8be34
@@ -7174,7 +7174,7 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   margin-top: 80px
 }
 
-#right-panel {
+.cmc-right-panel {
   position: absolute;
   top: 60px;
   right: 0;
@@ -7190,15 +7190,15 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   z-index: 12
 }
 
-.light-theme #right-panel {
+.light-theme .cmc-right-panel {
   background-color: #fff
 }
 
-.dark-theme #right-panel {
+.dark-theme .cmc-right-panel {
   background-color: #2a3139
 }
 
-#right-panel .close {
+.cmc-right-panel .close {
   position: absolute;
   top: 16px;
   left: -27px;
@@ -7208,16 +7208,16 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   box-shadow: -2px 0 4px 0 rgba(0, 0, 0, .25)
 }
 
-.light-theme #right-panel .close {
+.light-theme .cmc-right-panel .close {
   background-color: #818d99
 }
 
-.dark-theme #right-panel .close {
+.dark-theme .cmc-right-panel .close {
   background-color: #5c6773
 }
 
-#right-panel .close:after,
-#right-panel .close:before {
+.cmc-right-panel .close:after,
+.cmc-right-panel .close:before {
   content: "";
   position: absolute;
   width: 2px;
@@ -7230,70 +7230,70 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   transform: rotate(45deg)
 }
 
-.dark-theme #right-panel .close:after,
-.dark-theme #right-panel .close:before,
-.light-theme #right-panel .close:after,
-.light-theme #right-panel .close:before {
+.dark-theme .cmc-right-panel .close:after,
+.dark-theme .cmc-right-panel .close:before,
+.light-theme .cmc-right-panel .close:after,
+.light-theme .cmc-right-panel .close:before {
   background-color: #fff
 }
 
-#right-panel .playbook-meta {
+.cmc-right-panel .playbook-meta {
   position: relative;
   height: 100%;
   padding: 20px
 }
 
-#right-panel .playbook-meta h3 {
+.cmc-right-panel .playbook-meta h3 {
   font-weight: 500;
   font-size: 14px
 }
 
-.light-theme #right-panel .playbook-meta h3 {
+.light-theme .cmc-right-panel .playbook-meta h3 {
   color: #000
 }
 
-.dark-theme #right-panel .playbook-meta h3 {
+.dark-theme .cmc-right-panel .playbook-meta h3 {
   color: #fff
 }
 
-#right-panel .playbook-meta .version-numbers {
+.cmc-right-panel .playbook-meta .version-numbers {
   margin-top: 10px
 }
 
-#right-panel .playbook-meta .version-numbers div {
+.cmc-right-panel .playbook-meta .version-numbers div {
   font-size: 12px
 }
 
-.light-theme #right-panel .playbook-meta .version-numbers div {
+.light-theme .cmc-right-panel .playbook-meta .version-numbers div {
   color: #818d99;
   font-weight: 400
 }
 
-.dark-theme #right-panel .playbook-meta .version-numbers div {
+.dark-theme .cmc-right-panel .playbook-meta .version-numbers div {
   color: #818d99;
   font-weight: 300
 }
 
-#right-panel .playbook-meta .inputs {
+.cmc-right-panel .playbook-meta .inputs {
   position: relative
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget {
   float: none;
   width: 100%;
   margin: 16px 0
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget.open li.search {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget.open li.search {
   height: 36px;
   padding-left: 5px
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget.open i.fa {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget.open i.fa {
   padding-right: 10px
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget label {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget label {
   display: inline-block;
   top: 4px;
   width: 72px;
@@ -7302,92 +7302,92 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   text-align: right
 }
 
-.dark-theme #right-panel .playbook-meta .inputs .dropdown-widget.error .dropdown-input .dropdown-background,
-.light-theme #right-panel .playbook-meta .inputs .dropdown-widget.error .dropdown-input .dropdown-background {
+.dark-theme .cmc-right-panel .playbook-meta .inputs .dropdown-widget.error .dropdown-input .dropdown-background,
+.light-theme .cmc-right-panel .playbook-meta .inputs .dropdown-widget.error .dropdown-input .dropdown-background {
   border-color: #dc4e41
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget .dropdown-input {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget .dropdown-input {
   display: inline-block;
   width: 250px
 }
 
-#right-panel .playbook-meta .toggles {
+.cmc-right-panel .playbook-meta .toggles {
   position: relative;
   height: 60px
 }
 
-#right-panel .playbook-meta .toggles .toggle-wrapper {
+.cmc-right-panel .playbook-meta .toggles .toggle-wrapper {
   display: block;
   float: left;
   top: 0
 }
 
-#right-panel .playbook-meta .toggles .toggle-wrapper:nth-child(2n) {
+.cmc-right-panel .playbook-meta .toggles .toggle-wrapper:nth-child(2n) {
   width: 130px
 }
 
-#right-panel .playbook-meta .toggles .toggle-wrapper:nth-child(odd) {
+.cmc-right-panel .playbook-meta .toggles .toggle-wrapper:nth-child(odd) {
   width: 202px
 }
 
-#right-panel .playbook-meta .toggles .toggle-wrapper .toggle-title {
+.cmc-right-panel .playbook-meta .toggles .toggle-wrapper .toggle-title {
   display: inline-block;
   width: 80px;
   height: 28px;
   vertical-align: top
 }
 
-#right-panel .playbook-meta .toggles .toggle-wrapper .toggle {
+.cmc-right-panel .playbook-meta .toggles .toggle-wrapper .toggle {
   display: inline-block;
   margin: 0
 }
 
-#right-panel .playbook-meta .description,
-#right-panel .playbook-meta .notes {
+.cmc-right-panel .playbook-meta .description,
+.cmc-right-panel .playbook-meta .notes {
   position: relative;
   height: calc(50% - 233px)
 }
 
-#right-panel .playbook-meta .description label,
-#right-panel .playbook-meta .notes label {
+.cmc-right-panel .playbook-meta .description label,
+.cmc-right-panel .playbook-meta .notes label {
   display: block;
   margin-bottom: 2px;
   font-size: 12px
 }
 
-.light-theme #right-panel .playbook-meta .description label,
-.light-theme #right-panel .playbook-meta .notes label {
+.light-theme .cmc-right-panel .playbook-meta .description label,
+.light-theme .cmc-right-panel .playbook-meta .notes label {
   color: #3c444d
 }
 
-.dark-theme #right-panel .playbook-meta .description label,
-.dark-theme #right-panel .playbook-meta .notes label {
+.dark-theme .cmc-right-panel .playbook-meta .description label,
+.dark-theme .cmc-right-panel .playbook-meta .notes label {
   color: #fff
 }
 
-#right-panel .playbook-meta .description textarea,
-#right-panel .playbook-meta .notes textarea {
+.cmc-right-panel .playbook-meta .description textarea,
+.cmc-right-panel .playbook-meta .notes textarea {
   width: 100%;
   height: calc(100% - 30px);
   padding: 3px 5px
 }
 
-.light-theme #right-panel .playbook-meta .description textarea,
-.light-theme #right-panel .playbook-meta .notes textarea {
+.light-theme .cmc-right-panel .playbook-meta .description textarea,
+.light-theme .cmc-right-panel .playbook-meta .notes textarea {
   background-color: #fff;
   border-color: #c3cbd4;
   color: #3c444d
 }
 
-.dark-theme #right-panel .playbook-meta .description textarea,
-.dark-theme #right-panel .playbook-meta .notes textarea {
+.dark-theme .cmc-right-panel .playbook-meta .description textarea,
+.dark-theme .cmc-right-panel .playbook-meta .notes textarea {
   background-color: transparent;
   border-color: #5c6773;
   color: #fff
 }
 
-#right-panel .playbook-meta .links {
+.cmc-right-panel .playbook-meta .links {
   position: absolute;
   bottom: 0;
   height: 140px;
@@ -7396,52 +7396,52 @@ html .dark-theme .ui-button.ui-state-disabled:hover {
   padding: 0
 }
 
-#right-panel .playbook-meta .links li {
+.cmc-right-panel .playbook-meta .links li {
   height: 20px;
   font-weight: 400;
   font-size: 12px
 }
 
-#right-panel .playbook-meta .links li a {
+.cmc-right-panel .playbook-meta .links li a {
   text-decoration: none
 }
 
-.light-theme #right-panel .playbook-meta .links li a {
+.light-theme .cmc-right-panel .playbook-meta .links li a {
   color: #3c444d
 }
 
-.dark-theme #right-panel .playbook-meta .links li a {
+.dark-theme .cmc-right-panel .playbook-meta .links li a {
   color: #fff
 }
 
-#right-panel .playbook-meta .links li:hover li {
+.cmc-right-panel .playbook-meta .links li:hover li {
   text-decoration: underline
 }
 
-#right-panel .playbook-meta .links li .fa {
+.cmc-right-panel .playbook-meta .links li .fa {
   margin-right: 10px;
   cursor: pointer
 }
 
-.light-theme #right-panel .playbook-meta .links li .fa {
+.light-theme .cmc-right-panel .playbook-meta .links li .fa {
   color: #3c444d
 }
 
-.dark-theme #right-panel .playbook-meta .links li .fa {
+.dark-theme .cmc-right-panel .playbook-meta .links li .fa {
   color: #fff
 }
 
-#right-panel .close:before {
+.cmc-right-panel .close:before {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg)
 }
 
-#right-panel .playbook-meta .inputs .dropdown-widget.open .dropdown-input input.dropdown-search {
+.cmc-right-panel .playbook-meta .inputs .dropdown-widget.open .dropdown-input input.dropdown-search {
   width: 220px;
   margin-left: 5px
 }
 
-#right-panel.mssp .playbook-meta .description,
-#right-panel .playbook-meta .notes {
+.cmc-right-panel.mssp .playbook-meta .description,
+.cmc-right-panel .playbook-meta .notes {
   height: calc(50% - 225px)
 }
