@@ -2,7 +2,11 @@
 
 import {
   defaultsDeep,
+  each,
   extend,
+  keys,
+  startsWith,
+  clone,
 } from 'lodash'
 
 import {
@@ -278,6 +282,49 @@ export const ActionModel = Model.extend(extend({}, {
         refX: 5,
       },
     })
+  },
+
+  generateMenuData: function () {
+    var t = this
+    var e = this.getFunctionName()
+    var i = {
+      name: e,
+      fields: {
+        '_MENU_GROUP_action results': 'action results',
+      },
+    }
+    var n = {}
+    var s = 0
+    this.assets && each(this.assets.models, function (t) {
+      s += keys(t.get('fields')).length
+      each(t.get('output'), function (t) {
+        var i = e + ':' + t.data_path
+        startsWith(t.data_path, 'summary') || (n[i] = {
+          type: t.type,
+          contains: t.contains ? t.contains : [],
+        })
+      })
+    })
+    this.coa.action_keys[e] = {
+      name: e,
+      fields: clone(n),
+    }
+    i.fields = extend(i.fields, n)
+    if (
+      this.assets &&
+      this.assets.length > 0 &&
+      s > 0
+    ) {
+      i.fields['_MENU_GROUP_input artifact:*.cef'] = {}
+      each(keys(this.cefs.values), function (n) {
+        i.fields[e + ':' + n] = t.cefs.values[n]
+      })
+      i.fields['_MENU_GROUP_input artifact headers'] = {}
+      each(this.artifact_data, function (t) {
+        i.fields[e + ':' + t] = t
+      })
+    }
+    this.menuData = [i]
   },
 }))
 

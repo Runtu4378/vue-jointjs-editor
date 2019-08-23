@@ -214,6 +214,8 @@ export default _bb.View.extend({
     this.paper.on('translate', this.paperTranslate, this)
     this.dispatcher.on('panel:close', this.resetSelection, this)
     this.dispatcher.on('block:add', this.addBlock, this)
+
+    this.listenTo(this.coa, 'change:panelOpen', this.slideCanvas)
   },
   /** 初始化节点添加函数 */
   initAddBlockFunctions: function () {
@@ -279,6 +281,30 @@ export default _bb.View.extend({
   },
 
   /** ---事件处理-start--- */
+  slideCanvas: function (t, e) {
+    console.log('slideCanvas', e)
+    if (e) {
+      var i = this.coa.get('blockX')
+      if (i + this.originX < 380) {
+        var n = 380 - (i + this.originX)
+        this.slideSpeed = n / 20
+        this.slideEnd = n + this.originX
+        this.handleSlide()
+      }
+    }
+  },
+  handleSlide: function () {
+    if (this.slideEnd > this.originX) {
+      var t = this.originX + this.slideSpeed > this.slideEnd
+        ? this.slideEnd - this.originX
+        : this.slideSpeed
+      var e = this.paper.translate()
+      console.log('now: ', e)
+      this.slideCurrent += t
+      this.paper.translate(t + this.originX, e.ty)
+      this.slideTimer = window.setTimeout(_.bind(this.handleSlide, this), 10)
+    }
+  },
   paperTranslate: function (t, e) {
     this.originX = t
     this.originY = e

@@ -1,6 +1,11 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
-import * as joint from 'jointjs'
+import {
+  dia,
+  util,
+  shapes,
+  V,
+} from 'jointjs'
 import {
   defaultsDeep,
   each,
@@ -10,14 +15,10 @@ import {
   omit,
 } from 'lodash'
 
-joint.shapes.basic.PortsModelInterface = {
+shapes.basic.PortsModelInterface = {
   initialize: function () {
     this.updatePortsAttrs()
-    this.on(
-      'change:inPorts change:outPorts',
-      this.updatePortsAttrs,
-      this,
-    )
+    this.on('change:inPorts change:outPorts', this.updatePortsAttrs, this)
     this.constructor.__super__.constructor.__super__.initialize.apply(this, arguments)
   },
   updatePortsAttrs: function (t) {
@@ -64,23 +65,23 @@ joint.shapes.basic.PortsModelInterface = {
   },
 }
 
-joint.shapes.basic.PortsViewInterface = {
+shapes.basic.PortsViewInterface = {
   initialize: function () {
     this.listenTo(this.model, 'process:ports', this.update)
-    joint.dia.ElementView.prototype.initialize.apply(this, arguments)
+    dia.ElementView.prototype.initialize.apply(this, arguments)
   },
   update: function () {
     this.renderPorts()
-    joint.dia.ElementView.prototype.update.apply(this, arguments)
+    dia.ElementView.prototype.update.apply(this, arguments)
   },
   renderPorts: function () {
     var nodeIn = this.$('.inPorts').empty()
     var nodeOut = this.$('.outPorts').empty()
-    var renderFunc = joint.util.template(this.model.portMarkup)
+    var renderFunc = util.template(this.model.portMarkup)
     each(filter(this.model.ports, function (t) {
       return t.type === 'in'
     }), function (port, id) {
-      nodeIn.append(joint.V(renderFunc({
+      nodeIn.append(V(renderFunc({
         id: id,
         port: port,
       })).node)
@@ -88,7 +89,7 @@ joint.shapes.basic.PortsViewInterface = {
     each(filter(this.model.ports, function (t) {
       return t.type === 'out'
     }), function (port, id) {
-      nodeOut.append(joint.V(renderFunc({
+      nodeOut.append(V(renderFunc({
         id: id,
         port: port,
       })).node)
@@ -118,9 +119,9 @@ export const defaultProps = {
   portBgColor: '#51B252',
 }
 
-export const Model = joint.shapes.basic.Generic.extend(extend(
+export const Model = shapes.basic.Generic.extend(extend(
   {},
-  joint.shapes.basic.PortsModelInterface,
+  shapes.basic.PortsModelInterface,
   {
     markup: '',
     portMarkup: `<g class="port port-<%= id %>">
@@ -129,11 +130,12 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
 </g>`,
     defaults: defaultsDeep({
       type: 'coa.Base',
-    }, joint.shapes.devs.Model.prototype.defaults),
+    }, shapes.devs.Model.prototype.defaults),
 
     initialize: function () {
       this.menuData = []
-      joint.shapes.basic.PortsModelInterface.initialize.apply(this, arguments)
+      this.listenTo(this, 'change', this.generateMenuData)
+      shapes.basic.PortsModelInterface.initialize.apply(this, arguments)
     },
 
     getPortAttrs: function (id, e, length, parentClass, type) {
@@ -154,15 +156,30 @@ export const Model = joint.shapes.basic.Generic.extend(extend(
       return attrs
     },
 
+    generateMenuData: function () {},
     getMenuData: function (t, e) {
       return this.menuData
+    },
+    getFunctionName: function () {
+      var t = this.get('name')
+      if (this.get('custom_name') !== '') {
+        t = this.get('custom_name')
+      } else {
+        t += ' ' + this.get('number')
+      }
+      if (t) {
+        t = t.replace(/[^a-zA-Z0-9_]/g, ' ')
+        t = util.trim(t)
+        t = t.replace(/\s+/g, '_')
+      }
+      return t
     },
   },
 ))
 
-export const View = joint.dia.ElementView.extend(extend(
+export const View = dia.ElementView.extend(extend(
   {},
-  joint.shapes.basic.PortsViewInterface,
+  shapes.basic.PortsViewInterface,
   {
     baseEvents: {
       'click .delete': 'confirmDelete',
@@ -182,8 +199,8 @@ export const View = joint.dia.ElementView.extend(extend(
     },
     extraEvents: {},
     initialize: function () {
-      joint.dia.ElementView.prototype.initialize.apply(this, arguments)
-      joint.shapes.basic.PortsViewInterface.initialize.apply(this, arguments)
+      dia.ElementView.prototype.initialize.apply(this, arguments)
+      shapes.basic.PortsViewInterface.initialize.apply(this, arguments)
     },
     events: function () {
       return extend({}, this.baseEvents, this.extraEvents)
