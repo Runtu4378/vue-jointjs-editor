@@ -35,7 +35,7 @@ export const ActionModel = Model.extend(extend({}, {
 </g>
 `,
   defaults: defaultsDeep({
-    type: `${defaultProps.prefix}.Action`,
+    type: 'coa.Action',
     size: {
       width: itemWidth,
       height: itemHeight,
