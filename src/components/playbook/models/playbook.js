@@ -8,9 +8,11 @@ export default _bb.Model.extend({
     id: '',
     name: '',
     coa_data: {},
+    current_id: '',
   },
   errors: {},
   initialize: function () {
+    this.mode = 'edit'
     this.loaded = false
     this.on('sync', this.onSync, this)
     this.on('change:name', this.markModified, this)

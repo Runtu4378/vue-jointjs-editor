@@ -14,6 +14,7 @@ import { defaultProps } from './nodes/base'
 import Header from './views/header/main'
 import Canvas from './views/canvas'
 import Panels from './panels/manager'
+import Loader from './views/loader'
 
 const template = `
 <div class="content <% if (theme != 'light') { %>dark-theme<% } else { %>light-theme<% } %>">
@@ -53,6 +54,7 @@ export default _bb.View.extend({
   }) {
     this.el = `#${mountId}`
     this.mountId = mountId
+    this.firstLoad = true
     this.template = _.template(template)
     this.initDOM(mountId)
     this.render()
@@ -95,12 +97,37 @@ export default _bb.View.extend({
     // `)
   },
   render: function () {
-    const mountId = this.mountId
-    this.header = new Header(this.headerId)
-    this.canvas = new Canvas(mountId, this.paperId)
-    this.panels = new Panels({
-      id: this.panelId,
-      canvas: this.canvas,
-    })
+    // 加载必须组件
+    if (this.firstLoad) {
+      const mountId = this.mountId
+      this.header = new Header(this.headerId)
+      this.canvas = new Canvas(mountId, this.paperId)
+      this.panels = new Panels({
+        id: this.panelId,
+        canvas: this.canvas,
+      })
+      this.loader = new Loader()
+      this.firstLoad = false
+    }
+
+    // 初始化流程
+    if (
+      this.playbook.mode === 'edit' &&
+      this.playbook.get('current_id') === ''
+    ) {
+      // 创建流程
+      this.playbook.set('coa_schema_version', window.SCHEMA_VERSION)
+      this.editPlaybook()
+    } else {
+      this.loader.checkForNewerVersion()
+    }
+  },
+
+  editPlaybook: function () {
+    this.dispatcher.trigger('notification:clear')
+    this.loader.validate()
+    this.canvas.runConversions()
+    this.coa.set('editMode', true)
+    this.blocks.getActive() && this.panels.update()
   },
 })

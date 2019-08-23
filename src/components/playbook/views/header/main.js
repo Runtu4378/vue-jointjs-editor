@@ -41,7 +41,7 @@ export default _bb.View.extend({
     this.nameInput = null
     this.action = null
     this.buttonWidget = null
-    this.panelOpen = !1
+    this.panelOpen = false
     this.template = _.template(template)
     // this.panel = new i
     // this.listenTo(this.dispatcher, 'update:labels', this.setLabels)
@@ -51,7 +51,7 @@ export default _bb.View.extend({
     // this.listenTo(this.dispatcher, 'update:tags', this.setTags)
     // this.listenTo(this.dispatcher, 'paper:scale', this.onScale)
     // this.listenTo(this.dispatcher, 'mode:view', this.setViewMode)
-    // this.listenTo(this.dispatcher, 'mode:edit', this.setEditMode)
+    this.listenTo(this.dispatcher, 'mode:edit', this.setEditMode)
     // this.listenTo(this.dispatcher, 'editor:full', this.setEditorFull)
     // this.listenTo(this.dispatcher, 'editor:small', this.setEditorSmall)
     // this.listenTo(this.dispatcher, 'header:close', this.collapse)

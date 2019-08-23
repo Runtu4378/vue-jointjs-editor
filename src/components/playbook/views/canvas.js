@@ -223,6 +223,18 @@ export default _bb.View.extend({
     }
   },
 
+  runConversions: function () {
+    var t = this
+    if (this.coa.conversions.length > 0) {
+      this.coa.conversions = _.unique(this.coa.conversions)
+      _.each(this.coa.conversions, function (e) {
+        e === 'decision_to_filter' && t.convertDecisionToFilter()
+        e === 'to_multi_prompt' && t.convertToMultiPrompt()
+      })
+      this.coa.conversions = []
+    }
+  },
+
   /** 节点添加-start */
   addAction: function () {
     var t = new ActionModel()
