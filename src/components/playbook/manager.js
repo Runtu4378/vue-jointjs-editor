@@ -121,6 +121,14 @@ export default _bb.View.extend({
     } else {
       this.loader.checkForNewerVersion()
     }
+
+    this.coa.set({
+      modified: false,
+      codeChanged: false,
+      propsChanged: false,
+    })
+
+    return this
   },
 
   editPlaybook: function () {
