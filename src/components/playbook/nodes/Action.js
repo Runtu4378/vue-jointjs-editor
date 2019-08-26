@@ -263,6 +263,25 @@ export const ActionModel = Model.extend(extend({}, {
         },
       })
     })
+    this.on('change:active', function (t, e) {
+      e && this.set('status', 'active')
+      if (e && this.coa.get('editMode')) {
+        t.attr('.status/opacity', 1)
+        t.attr('.message/opacity', 1)
+        t.attr('.background/height', 120)
+      } else {
+        t.attr('.status/opacity', 0)
+        t.attr('.message/opacity', 0)
+        t.attr('.background/height', 100)
+        if (!e) {
+          this.errors > 0 ?
+            this.set('status', 'error')
+            : this.warnings.length > 0
+              ? this.set('status', 'warn')
+              : this.set('status', '')
+        }
+      }
+    })
 
     this.attr('.color-band/fill', this.coa_settings.getBlockHeaderColor())
     this.attr('.background/fill', this.coa_settings.getBlockBackgroundColor())

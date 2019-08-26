@@ -28,7 +28,11 @@ export default _bb.Model.extend({
   url: function () {
     var t = ''
     var e = {}
-    if (this.get('config_type') === 'app' || this.get('missing') && !this.get('loaded')) {
+    if (
+      this.get('config_type') !== 'app' &&
+      this.get('missing') &&
+      !this.get('loaded')
+    ) {
       t = '/coa/app_config?'
       e = {
         app_name: this.get('app_name'),
