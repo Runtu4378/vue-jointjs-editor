@@ -5,6 +5,10 @@ import _lo from 'lodash'
 
 import ListHeader from './list_header'
 import Search from './search'
+import Scroller from '../../../widgets/scroller/scroller'
+
+const template = `<div class="logo-wrapper<% if (show_dark_logo) {%> dark<% } %>"><div class="app-logo" style="background-image: url('/app_resource/<%= directory %>/<% if (show_dark_logo) {%><%= _pretty_dark_logo %><% } else { %><%= logo %><% } %>')"></div></div><div class="app-name"><%- name %></div>
+`
 
 export default _bb.View.extend({
   className: 'app-list',
@@ -16,8 +20,8 @@ export default _bb.View.extend({
       placeholder: 'Search apps',
       event: 'search:applist',
     })
-    this.scrollerView = new o({
-      tmpl: a,
+    this.scrollerView = new Scroller({
+      tmpl: template,
       clickEvent: 'app:select',
     })
     this.listenTo(this.dispatcher, 'search:applist', this.doSearch)

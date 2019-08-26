@@ -10,6 +10,7 @@ import Coa from './models/coa'
 import CoaSetting from './models/coa_settings'
 
 import Blocks from './collections/blocks'
+import Apps from './collections/apps'
 
 export default class PlayBook {
   /** 挂载dom的id */
@@ -33,6 +34,7 @@ export default class PlayBook {
     /* eslint-disable-next-line */
     const coa_settings = new CoaSetting()
     const blocks = new Blocks()
+    const apps = new Apps()
 
     _lo.each([
       _bb.Collection.prototype,
@@ -46,6 +48,7 @@ export default class PlayBook {
         coa,
         coa_settings,
         blocks,
+        apps,
       })
     })
   }

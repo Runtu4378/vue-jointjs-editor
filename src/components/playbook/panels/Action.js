@@ -2,6 +2,8 @@
 
 import _bb from 'backbone'
 
+import Apps from '../panels/action/apps'
+
 export default _bb.View.extend({
   initialize: function () {
     this.panel = null
@@ -23,7 +25,7 @@ export default _bb.View.extend({
     this.cleanup()
     switch (this.state) {
       case 'apps':
-        this.panel = new n({
+        this.panel = new Apps({
           model: this.model,
         })
         break
