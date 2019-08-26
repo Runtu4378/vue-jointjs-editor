@@ -23,8 +23,6 @@ const scrollable = {
     this.$handle = $(this.el).find(this.handleClass)
     this.$content = $(this.el).find(this.contentClass)
     this.$container = this.$content.parent()
-    console.log(typeof this.$handle.draggable)
-    console.log(this.handleClass)
     this.$handle.draggable({
       containment: 'parent',
     }).on('drag', _.bind(this.handleDrag, this))
