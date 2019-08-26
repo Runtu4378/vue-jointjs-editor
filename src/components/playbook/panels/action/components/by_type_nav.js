@@ -1,8 +1,9 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _bb from 'backbone'
 import _lo from 'lodash'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 const template = `
 <h3>CHOOSE ACTION</h3>

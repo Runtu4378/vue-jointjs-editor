@@ -2,7 +2,7 @@
 
 import _bb from 'backbone' // e
 import _lo from 'lodash' // n
-import $ from 'jquery' // s
+// import $ from 'jquery' // s
 import * as joint from 'jointjs' // u
 
 // joint.V -> l

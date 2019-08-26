@@ -1,6 +1,7 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
-import $ from 'jquery'
+// import $ from 'jquery'
 import _ from 'underscore'
 
 import Base from './base'

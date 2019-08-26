@@ -1,8 +1,9 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _bb from 'backbone'
 import _ from 'underscore'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 import { defaultProps } from '../../nodes/base'
 import Input from '../../widgets/input'

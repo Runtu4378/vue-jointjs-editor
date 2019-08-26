@@ -1,8 +1,9 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _ from 'underscore'
 
-export default {
+const scrollable = {
   trackOffset: -20,
   contentOffset: 0,
   trackClass: '.scroller-track',
@@ -18,10 +19,12 @@ export default {
     this.listenTo(this.dispatcher, 'document:resize', this.updateSize)
   },
   renderScrollable: function () {
-    this.$track = this.$el.find(this.trackClass)
-    this.$handle = this.$el.find(this.handleClass)
-    this.$content = this.$el.find(this.contentClass)
+    this.$track = $(this.el).find(this.trackClass)
+    this.$handle = $(this.el).find(this.handleClass)
+    this.$content = $(this.el).find(this.contentClass)
     this.$container = this.$content.parent()
+    console.log(typeof this.$handle.draggable)
+    console.log(this.handleClass)
     this.$handle.draggable({
       containment: 'parent',
     }).on('drag', _.bind(this.handleDrag, this))
@@ -104,3 +107,5 @@ export default {
     this.updateScroll()
   },
 }
+
+export default scrollable

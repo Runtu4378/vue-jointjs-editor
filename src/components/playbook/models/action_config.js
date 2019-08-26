@@ -1,7 +1,8 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _bb from 'backbone'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 export default _bb.Model.extend({
   defaults: {

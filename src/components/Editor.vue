@@ -5,6 +5,7 @@
 </template>
 
 <script>
+/* globals $ */
 // import Editor from './editor/index.js'
 import PlayBook from './playbook/index.js'
 
@@ -16,8 +17,10 @@ export default {
   },
 
   mounted () {
-    this.editor = new PlayBook({
-      id: 'canvas'
+    $(function () {
+      new PlayBook({
+        id: 'canvas'
+      })
     })
   }
 }

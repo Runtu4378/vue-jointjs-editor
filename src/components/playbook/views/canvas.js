@@ -1,7 +1,8 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _bb from 'backbone'
-import $ from 'jquery'
+// import $ from 'jquery'
 import _ from 'underscore'
 import * as joint from 'jointjs'
 import 'jointjs/dist/joint.css'

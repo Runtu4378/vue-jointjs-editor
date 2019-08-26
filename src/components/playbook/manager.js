@@ -1,8 +1,10 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
+/* globals $ */
 
 import _bb from 'backbone'
 import _ from 'underscore'
-import $ from 'jquery'
+// import $ from 'jquery'
+// import './jquery/js/jquery-ui.min.js'
 
 import './font/Roboto.css'
 import './font-awesome/css/font-awesome.min.css'
