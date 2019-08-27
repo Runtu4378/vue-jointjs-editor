@@ -4,6 +4,7 @@ import _bb from 'backbone'
 import _lo from 'lodash'
 
 import Manager from './manager'
+import Progress from './progress'
 
 import Playbook from './models/playbook'
 import Coa from './models/coa'
@@ -29,6 +30,8 @@ export default class PlayBook {
     const dispatcher = _lo.extend({}, _bb.Events, {
       cid: 'dispatcher',
     })
+    const progress = new Progress()
+    progress.set('Processing system information')
     const playbook = new Playbook()
     const coa = new Coa()
     /* eslint-disable-next-line */
@@ -44,6 +47,7 @@ export default class PlayBook {
     ], function (base) {
       return _lo.extend(base, {
         dispatcher,
+        progress,
         playbook,
         coa,
         coa_settings,

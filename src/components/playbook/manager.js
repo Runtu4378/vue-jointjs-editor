@@ -1,8 +1,10 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 /* globals $ */
+// views/manager
 
 import _bb from 'backbone'
 import _ from 'underscore'
+import _lo from 'lodash'
 // import $ from 'jquery'
 // import './jquery/js/jquery-ui.min.js'
 
@@ -39,7 +41,7 @@ const template = `
   </div>
 </div>
 <div id="<%= notificationsId %>" class="cmc-notifications"></div>
-<div id="<%= loaderId %>" class="cmc-loader hidden">
+<div id="<%= loaderId %>" class="cmc-loader">
   <div class="message">
     <div class="loader"></div>
     <div class="title">Loading Phantom Playbook Editor</div>
@@ -59,7 +61,9 @@ export default _bb.View.extend({
     this.firstLoad = true
     this.template = _.template(template)
     this.initDOM(mountId)
-    this.render()
+    this.initEvent()
+    this.initData()
+    // this.render()
   },
   initDOM: function (mountId) {
     const headerId = this.headerId = `${mountId}_header`
@@ -132,6 +136,16 @@ export default _bb.View.extend({
 
     return this
   },
+  /** 初始化事件监听 */
+  initEvent: function () {
+    this.listenTo(this.apps, 'sync', this.appsReady)
+  },
+  /** 初始化数据 */
+  initData: function () {
+    this.apps.fetch({
+      error: _.bind(this.app_error, this),
+    })
+  },
 
   editPlaybook: function () {
     this.dispatcher.trigger('notification:clear')
@@ -139,5 +153,35 @@ export default _bb.View.extend({
     this.canvas.runConversions()
     this.coa.set('editMode', true)
     this.blocks.getActive() && this.panels.update()
+  },
+
+  isReady: function () {
+    var t = this
+    if (
+      // this.playbookLoaded &&
+      // this.actionsLoaded &&
+      // this.assetsLoaded &&
+      this.appsLoaded
+      // this.cefLoaded
+    ) {
+      _lo.each(this.apps.models, function (e) {
+        var n = t.system_assets.where({
+          product_name: e.get('product_name'),
+        })
+        n.length > 0 && _lo.filter(n[0].get('actions'), function (t) {
+          return t !== 'on poll' && t !== 'test connectivity'
+        }).length > 0 && e.set('is_configured', !0)
+      })
+      this.actions.setHasAssets()
+      this.apps.setActions()
+      this.render()
+    }
+  },
+  app_error: function (t, e, i) {
+    this.progress.error('Failed to load App data: View Apps permission required')
+  },
+  appsReady: function () {
+    this.appsLoaded = true
+    this.isReady()
   },
 })

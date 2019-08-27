@@ -342,19 +342,29 @@ export const View = dia.ElementView.extend(extend(
       this.$el.on('mousemove', _.bind(this.positionBlockTip, this))
     },
     hideBlockTip: function (t) {
-      this.blocktip && (this.$el.off("mousemove"), this.blocktip.stop(!0, !1).fadeOut(200, function () {
-        $(this).remove()
-      }))
+      if (this.blocktip) {
+        this.$el.off('mousemove')
+        this.blocktip.stop(!0, !1).fadeOut(200, function () {
+          $(this).remove()
+        })
+      }
     },
     positionBlockTip: function (t) {
-      var e = t.pageY,
-        i = t.pageX,
-        n = this.blocktip.height(),
-        s = this.blocktip.width(),
-        o = this.blocktip.data("dir");
-      "left" === o ? (e -= n / 2 + 15, i -= s + 65) : (e -= n / 2 + 15, i += 25), this.blocktip.css({
+      var e = t.pageY
+      var i = t.pageX
+      var n = this.blocktip.height()
+      var s = this.blocktip.width()
+      var o = this.blocktip.data('dir')
+      if (o === 'left') {
+        e -= n / 2 + 15
+        i -= s + 65
+      } else {
+        e -= n / 2 + 15
+        i += 25
+      }
+      this.blocktip.css({
         top: e,
-        left: i
+        left: i,
       })
     },
   },
