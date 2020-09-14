@@ -89,11 +89,6 @@ export default class PlayBook {
     // 在请求头中加入授权字段
     window.$.ajaxSetup({
       cache: false,
-      complete: function (xhr, textStatus) {
-        if (xhr.status === 401) {
-          window.$Router.replace(`/login?redirect=${window.$Router.currentRoute.path}`)
-        }
-      },
     })
 
     const dispatcher = _.extend({}, Backbone.Events, {

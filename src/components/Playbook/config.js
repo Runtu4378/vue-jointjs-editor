@@ -20,7 +20,7 @@ export default {
   /** 栅格大小 */
   gridSize: 20,
   /** 图片前缀 */
-  staticPrefix: '/static/coa/img',
+  staticPrefix: '/coa/img',
   /** header相关设置 */
   headerHeight: 28,
   headerIconPadding: 12,

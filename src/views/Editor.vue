@@ -7,6 +7,13 @@
       height="100%"
       width="100%"
       placement="bottom"
+      :bodyStyle="{
+        position: 'absolute',
+        top: '55px',
+        bottom: 0,
+        width: '100%',
+        padding: 0
+      }"
       @close="handleClose"
     >
       <div id="editor_main"></div>
