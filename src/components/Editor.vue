@@ -6,8 +6,7 @@
 
 <script>
 /* globals $ */
-// import Editor from './editor/index.js'
-import PlayBook from './playbook/index.js'
+import PlayBook from './Playbook/index.js'
 
 export default {
   editor: null,
@@ -18,6 +17,7 @@ export default {
 
   mounted () {
     $(function () {
+      /* eslint-disable-next-line */
       new PlayBook({
         id: 'canvas'
       })
