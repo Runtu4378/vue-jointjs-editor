@@ -1,0 +1,39 @@
+.cmc-header {
+  position: relative;
+  width: calc(100%);
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+
+  .canvas-controls {
+    position: absolute;
+    top: 10px;
+    right: 22px;
+    width: 200px;
+    div {
+      float: right;
+      line-height: 28px;
+      &.zoom-level {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      &.zoom-fit {
+        // margin-right: 10px;
+        cursor: pointer;
+      }
+      i.fa {
+        line-height: 28px;
+      }
+    }
+    .zoom-fit,
+    .zoom-minus,
+    .zoom-plus {
+      height: 28px;
+      width: 28px;
+      margin-left: 10px;
+      text-align: center;
+      box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      border-radius: 2px;
+    }
+  }
+}

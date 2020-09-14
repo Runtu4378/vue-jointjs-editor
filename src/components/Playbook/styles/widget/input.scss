@@ -1,0 +1,48 @@
+.input-widget {
+  position: relative;
+  float: left;
+  width: 250px;
+  color: #333;
+  padding: 13px 10px 0;
+  &.edit {
+    input {
+      background-color: #f1f2f5
+    }
+  }
+  &.error {
+    input {
+      color: #dc4e41;
+      border-color: #dc4e41;
+      &.error {
+        background-color: #f77363;
+      }
+    }
+  }
+  
+  label {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6c7a89;
+  }
+  .input-view {
+    float: left;
+    font-size: 20px;
+    padding: 2px;
+  }
+  input {
+    float: left;
+    margin-top: 9px;
+    padding: 3px 8px;
+    font-size: 14px;
+  }
+  i.fa {
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 21px;
+    color: #818d99;
+    cursor: pointer;
+  }
+}

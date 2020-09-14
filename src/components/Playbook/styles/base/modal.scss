@@ -1,0 +1,61 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  color: #3c444d;
+
+  .modal-overlay {
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, .5);
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom: 2px;
+  }
+  .controls {
+    margin: 30px -40px -40px;
+    padding-right: 40px;
+    text-align: right;
+    border: none;
+    background-color: #f2f4f5;
+    .cancel span {
+      padding: 2px 0
+    }
+  }
+  @mixin base {
+    position: relative;
+    display: block;
+    top: 80px;
+    width: 448px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 2px;
+    box-shadow: 2px 5px 5px -3px rgba(0, 0, 0, .25);
+    background-color: #fff;
+    z-index: 150;
+    p {
+      margin: 14px 0;
+      font-size: 14px;
+      color: #3c444d;
+    }
+  }
+
+  .alert {
+    @include base;
+    .controls div {
+      display: inline-block;
+      margin: 15px 0 15px 20px;
+      cursor: pointer;
+    }
+  }
+}

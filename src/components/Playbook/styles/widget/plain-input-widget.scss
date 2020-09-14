@@ -1,0 +1,5 @@
+@import './input-base.scss';
+
+.plain-input-widget {
+  @include inputBase();
+}

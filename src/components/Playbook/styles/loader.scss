@@ -1,0 +1,71 @@
+.cmc-loader {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  z-index: 500;
+
+  .message {
+    position: relative;
+    display: inline-block;
+    margin-top: 80px;
+    width: 300px;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+    .title {
+      margin-bottom: 10px;
+    }
+  }
+  .status {
+    font-size: 14px;
+    font-weight: 300;
+    color: #818d99;
+  }
+  .loading {
+    margin-top: 2px;
+  }
+  .error {
+    font-size: 14px;
+  }
+  .loader {
+    font-size: 10px;
+    margin: 10px auto;
+    text-indent: -9999em;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    background: #007abd;
+    background: linear-gradient(90deg, #007abd 5%, hsla(0, 0%, 100%, 0) 55%);
+    animation: load3 1.4s infinite linear;
+    transform: translateZ(0);
+    &:before {
+      width: 50%;
+      height: 50%;
+      border-radius: 100% 0 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      background: #007abd;
+    }
+    &:after {
+      width: 75%;
+      height: 75%;
+      border-radius: 50%;
+      content: "";
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: #f7f8fa;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.search-input-widget {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  margin-top: 5px;
+  border: 1px solid #c3cbd4;
+  .search {
+    position: relative;
+    width: 280px;
+    margin: 0;
+    padding: 7px 8px 7px 28px;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    font-size: 12px;
+    font-weight: 300;
+    color: #3c444d;
+  }
+  .fa {
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    width: 12px;
+    color: #818d99;
+  }
+}
