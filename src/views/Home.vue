@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <Editor />
+    <a-table :columns="columns" :data-source="data">
+      //
+    </a-table>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Editor from '@/components/Editor.vue'
-
 export default {
-  name: 'home',
-  components: {
-    Editor
-  }
+  data () {
+    return {
+      columns: [
+        {
+          title: '名称',
+          key: 'name'
+        },
+        {
+          title: '状态',
+          key: 'age'
+        },
+        {
+          title: '操作',
+          key: 'action',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+
+      data: []
+    }
+  },
+
+  methods: {}
 }
 </script>
 
@@ -40,5 +58,6 @@ body {
   height: 100%;
   top: 0;
   left: 0;
+  padding: 16px 28px;
 }
 </style>
