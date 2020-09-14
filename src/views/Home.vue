@@ -44,12 +44,12 @@ export default {
           title: '描述',
           key: 'description',
           dataIndex: 'description'
-        },
-        {
-          title: '操作',
-          key: 'action',
-          scopedSlots: { customRender: 'action' }
         }
+        // {
+        //   title: '操作',
+        //   key: 'action',
+        //   scopedSlots: { customRender: 'action' }
+        // }
       ],
 
       data: []
