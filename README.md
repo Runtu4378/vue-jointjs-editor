@@ -1,13 +1,13 @@
 # vue-joint-editor
 
-## Project setup
+## 启动本地server
 ```
-npm install
+npm run server
 ```
 
-### Compiles and hot-reloads for development
+### 启动本地web
 ```
-npm run serve
+npm start
 ```
 
 ### Compiles and minifies for production
