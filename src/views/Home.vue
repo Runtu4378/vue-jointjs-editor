@@ -1,23 +1,29 @@
 <template>
   <div class="home">
-    <a-table :columns="columns" :data-source="data">
-      //
-    </a-table>
+    <a-table
+      rowKey="id"
+      :columns="columns"
+      :data-source="data"
+    ></a-table>
   </div>
 </template>
 
 <script>
+import net from '../lib/api.js'
+
 export default {
   data () {
     return {
       columns: [
         {
           title: '名称',
-          key: 'name'
+          key: 'name',
+          dataIndex: 'name'
         },
         {
-          title: '状态',
-          key: 'age'
+          title: '描述',
+          key: 'description',
+          dataIndex: 'description'
         },
         {
           title: '操作',
@@ -30,7 +36,23 @@ export default {
     }
   },
 
-  methods: {}
+  mounted () {
+    this.initData()
+  },
+
+  methods: {
+    async initData () {
+      const { success, data, message } = await net({
+        method: 'GET',
+        url: '/playbook'
+      })
+      if (!success) {
+        this.$message.error(message)
+      } else {
+        this.data = data
+      }
+    }
+  }
 }
 </script>
 
