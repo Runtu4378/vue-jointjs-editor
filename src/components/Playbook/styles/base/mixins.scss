@@ -1,0 +1,40 @@
+@mixin breakWord {
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+@mixin chevron {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 51%;
+    background-color: #3c444d;
+    transform: skew(0deg, 12deg);
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background-color: #3c444d;
+    transform: skew(0deg, -12deg);
+  }
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

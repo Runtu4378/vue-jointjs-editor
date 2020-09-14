@@ -1,0 +1,171 @@
+.cmc-paper {
+  float: left;
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  min-width: 1400px;
+  min-height: 740px;
+  background-color: #f7f8fa;
+  z-index: 5;
+  &.disabled {
+    .delete {
+      cursor: auto
+    }
+    .joint-link.joint-theme-default .connection-wrap:hover {
+      opacity: 0;
+      cursor: auto
+    }
+    .joint-link.joint-theme-default .link-tools {
+      display: none
+    }
+  }
+
+  .joint-link.joint-theme-default .connection,
+  .joint-link.joint-theme-default .connection-wrap,
+  rect.border {
+    pointer-events: none
+  }
+
+  .delete,
+  [magnet=true]:not(.element) {
+    cursor: pointer
+  }
+
+  .joint-link .marker-arrowheads {
+    display: none
+  }
+  text.number {
+    fill: #818d99
+  }
+
+  .Selector image {
+    cursor: pointer
+  }
+  .transform-icon {
+    opacity: .5
+  }
+  circle {
+    &.dot,
+    &.glow {
+      fill: $color-primary
+    }
+    &.glow {
+      stroke: $color-primary;
+      stroke-width: 40;
+      stroke-opacity: .2;
+      fill-opacity: .5;
+      animation: pulse 1s infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-out
+    }
+  }
+  .active circle.port-body,
+  .pulse circle.port-body {
+    stroke-opacity: .5;
+    transition: stroke-opacity .5s ease
+  }
+  .outPorts .port-0 circle.port-body {
+    fill: $color-primary;
+    stroke: $color-primary
+  }
+  .outPorts .port-1 circle.port-body {
+    fill: #7672a4;
+    stroke: #7672a4
+  }
+  .outPorts .port-2 circle.port-body {
+    fill: #facb5d;
+    stroke: #facb5d
+  }
+  .outPorts .port-3 circle.port-body {
+    fill: #61b3b2;
+    stroke: #61b3b2
+  }
+  .outPorts .port-4 circle.port-body {
+    fill: #e37266;
+    stroke: #e37266
+  }
+  circle.port-body {
+    stroke: $color-primary;
+    stroke-width: 10;
+    stroke-opacity: 0;
+    fill: $color-primary;
+    transition: stroke-opacity .5s ease;
+  }
+  .selection {
+    border: 2px solid #000;
+    background-color: #feb663;
+    opacity: .3;
+    &.selected {
+      background-color: transparent;
+      border: none;
+      opacity: 1
+    }
+  }
+
+  .link-tools .tool-remove circle {
+    fill: #818d99
+  }
+
+  .joint-paper {
+    .joint-selection.joint-theme-default {
+      .selection-wrapper {
+        border: 2px dotted #d3d3d3;
+        border-radius: 4px
+      }
+      .selection-box {
+        border: 1px dashed #f39c12;
+        box-shadow: 2px 2px 5px #d3d3d3;
+        border-radius: 4px
+      }
+    }
+  }
+  .link-tools .tool-options {
+    display: none
+  }
+  .joint-type-coa-selector image,
+  g.notes {
+    cursor: pointer
+  }
+  .joint-type-coa-selector {
+    text {
+      opacity: 0;
+      transition: opacity .3s ease;
+      &.show {
+        opacity: 1;
+        transition: opacity .3s ease
+      }
+    }
+  }
+  g.error .icon {
+    pointer-events: none
+  }
+  .joint-cell text.name {
+    cursor: pointer;
+    fill: #3c444d;
+  }
+  text.title {
+    text-transform: uppercase
+  }
+
+  .joint-type-coa-intro {
+    cursor: auto;
+    .arrow,
+    .background {
+      fill: $color-primary;
+    }
+    .directions,
+    .title {
+      fill: #fff
+    }
+    .close {
+      fill: #3c444d;
+      &:hover {
+        fill: #818d99
+      }
+    }
+    .button,
+    .close {
+      cursor: pointer
+    }
+  }
+}

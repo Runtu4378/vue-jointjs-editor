@@ -1,0 +1,162 @@
+.cmc-settings {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  // width: $settings-width;
+  height: $settings-height;
+  width: 100%;
+  z-index: 10;
+
+  $panel-height: 500px;
+
+  .settings-lab {
+    @include clearfix;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 0 22px;
+    background-color: #2a3139;
+    box-shadow: -1px -1px 3px 1px rgba(0, 0, 0, .1);
+    z-index: 10;
+    .title {
+      float: left;
+      width: calc(100% - 300px);
+      line-height: $settings-height;
+      color: #fff;
+    }
+    .settings-controls {
+      @include clearfix;
+      float: left;
+      width: 300px;
+      padding: 8px 0;
+
+      .button-widget {
+        float: right;
+        margin-left: 16px;
+        &:first-child {
+          float: left;
+          margin-left: 0;
+        }
+      }
+      .btn-secondary {
+        border: 1px solid #3c444d;
+        background-color: #3c444d;
+        color: #fff;
+      }
+    }
+  }
+
+  .settings-panel {
+    position: absolute;
+    width: $settings-width;
+    height: $panel-height;
+    right: 22px;
+    box-shadow: -1px -1px 4px 0 rgba(0, 0, 0, .25);
+    transform: translateY($panel-height);
+    transition: transform .3s ease;
+    background-color: #fff;
+    z-index: 9;
+  
+    &.open {
+      transform: translateY(-$panel-height - $settings-height - 16px);
+    }
+
+    .close {
+      position: absolute;
+      top: 16px;
+      left: -27px;
+      width: 27px;
+      height: 27px;
+      cursor: pointer;
+      box-shadow: -2px 0 4px 0 rgba(0, 0, 0, .25);
+      background-color: #818d99;
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 19px;
+        left: 50%;
+        top: 50%;
+        margin-top: -10px;
+        margin-left: -1px;
+        background-color: #fff;
+        transform: rotate(45deg);
+      }
+      &:before {
+        transform: rotate(-45deg)
+      }
+    }
+    .playbook-meta {
+      position: relative;
+      height: 100%;
+      padding: 20px;
+      h3 {
+        font-weight: 500;
+        font-size: 14px;
+        color: #000;
+      }
+      .version-numbers {
+        margin-top: 10px;
+        div {
+          font-size: 12px;
+          font-weight: 400;
+          color: #818d99;
+        }
+      }
+      .inputs {
+        position: relative;
+        margin-top: 10px;
+        .input-widget {
+          @include clearfix;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+      .description {
+        position: relative;
+        height: 80px;
+        margin-top: 10px;
+        label {
+          display: block;
+          margin-bottom: 2px;
+          font-size: 12px;
+          color: #3c444d;
+        }
+        textarea {
+          width: 100%;
+          height: calc(100% - 14px);
+          padding: 3px 5px;
+          background-color: #fff;
+          border-color: #c3cbd4;
+          color: #3c444d;
+        }
+      }
+      .links {
+        position: absolute;
+        bottom: 0;
+        height: 140px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+          height: 20px;
+          font-weight: 400;
+          font-size: 12px;
+          &:hover li {
+            text-decoration: underline
+          }
+          a {
+            text-decoration: none;
+            color: #3c444d;
+          }
+          .fa {
+            margin-right: 10px;
+            cursor: pointer;
+            color: #3c444d
+          }
+        }
+      }
+    }
+  }  
+}

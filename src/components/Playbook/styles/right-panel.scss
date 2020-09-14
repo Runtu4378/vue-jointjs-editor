@@ -1,0 +1,165 @@
+.cmc-right-panel {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 372px;
+  height: 100%;
+  min-height: 760px;
+  box-shadow: -2px 0 4px 0 rgba(0, 0, 0, .25);
+  transform: translateX(400px);
+  transition: transform .3s ease;
+  background-color: #fff;
+  z-index: 12;
+
+  .close {
+    position: absolute;
+    top: 16px;
+    left: -27px;
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    box-shadow: -2px 0 4px 0 rgba(0, 0, 0, .25);
+    background-color: #818d99;
+    &:after,
+    &:before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 19px;
+      left: 50%;
+      top: 50%;
+      margin-top: -10px;
+      margin-left: -1px;
+      background-color: #fff;
+      transform: rotate(45deg);
+    }
+    &:before {
+      transform: rotate(-45deg)
+    }
+  }
+  .playbook-meta {
+    position: relative;
+    height: 100%;
+    padding: 20px;
+    h3 {
+      font-weight: 500;
+      font-size: 14px;
+      color: #000;
+    }
+    .version-numbers {
+      margin-top: 10px;
+      div {
+        font-size: 12px;
+        font-weight: 400;
+        color: #818d99;
+      }
+    }
+    .inputs {
+      position: relative;
+      .dropdown-widget {
+        float: none;
+        width: 100%;
+        margin: 16px 0;
+        &.open {
+          li.search {
+            height: 36px;
+            padding-left: 5px
+          }
+          i.fa {
+            padding-right: 10px
+          }
+          .dropdown-input input.dropdown-search {
+            width: 220px;
+            margin-left: 5px;
+          }
+        }
+        &.error .dropdown-input .dropdown-background {
+          border-color: #dc4e41;
+        }
+
+        label {
+          display: inline-block;
+          top: 4px;
+          width: 72px;
+          padding-right: 10px;
+          line-height: 26px;
+          text-align: right
+        }
+        .dropdown-input {
+          display: inline-block;
+          width: 250px
+        }
+      }
+    }
+    .toggles {
+      position: relative;
+      height: 60px;
+      .toggle-wrapper {
+        display: block;
+        float: left;
+        top: 0;
+        &:nth-child(2n) {
+          width: 130px
+        }
+        &:nth-child(odd) {
+          width: 202px
+        }
+
+        .toggle-title {
+          display: inline-block;
+          width: 80px;
+          height: 28px;
+          vertical-align: top
+        }
+        .toggle {
+          display: inline-block;
+          margin: 0
+        }
+      }
+    }
+    .description,
+    .notes {
+      position: relative;
+      height: calc(50% - 233px);
+      label {
+        display: block;
+        margin-bottom: 2px;
+        font-size: 12px;
+        color: #3c444d;
+      }
+      textarea {
+        width: 100%;
+        height: calc(100% - 30px);
+        padding: 3px 5px;
+        background-color: #fff;
+        border-color: #c3cbd4;
+        color: #3c444d;
+      }
+    }
+    .links {
+      position: absolute;
+      bottom: 0;
+      height: 140px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        height: 20px;
+        font-weight: 400;
+        font-size: 12px;
+        &:hover li {
+          text-decoration: underline
+        }
+        a {
+          text-decoration: none;
+          color: #3c444d;
+        }
+        .fa {
+          margin-right: 10px;
+          cursor: pointer;
+          color: #3c444d
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.cmc-stage-container {
+  width: 100%;
+  height: calc(100%);
+  overflow: hidden;
+  z-index: 5;
+
+  @import './paper.scss';
+  @import './select-menu.scss';
+
+  .cmc-stage {
+    position: relative;
+    width: 100vw;
+    height: calc(100%);
+    &.dirty {
+      .editor-disabled {
+        display: block
+      }
+    }
+
+    .editor-disabled {
+      position: absolute;
+      display: none;
+      top: 20px;
+      width: 100%;
+      padding-top: 60px;
+      text-align: center;
+      .message {
+        position: relative;
+        width: 200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        color: #999;
+        border-radius: 2px;
+        box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .25);
+        opacity: .8;
+        text-transform: uppercase;
+        z-index: 20
+      }
+    }
+  }
+}

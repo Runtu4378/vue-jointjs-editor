@@ -16,7 +16,7 @@
 
 <script>
 // @ is an alias to /src
-// import Editor from '@/components/Editor.vue'
+import Playbook from '@/components/Playbook/index.js'
 
 export default {
   coa: null,
@@ -62,9 +62,9 @@ export default {
 
     _show () {
       this.dialogVisible = true
-      // this.$nextTick(() => {
-      //   this._initPlaybook()
-      // })
+      this.$nextTick(() => {
+        this._initPlaybook()
+      })
     },
     _initPlaybook () {
       this.coa = new Playbook({

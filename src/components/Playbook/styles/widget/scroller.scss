@@ -1,0 +1,44 @@
+.scroller-widget {
+  position: relative;
+  overflow: hidden;
+  .scroller-content {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .scroller-track {
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 100%;
+    border-radius: 0;
+    .scroller-handle {
+      position: absolute;
+      top: 0;
+      width: 7px;
+      height: 100px;
+      border-radius: 3px;
+      background-color: #c3cbd4;
+      cursor: pointer;
+    }
+  }
+  ul {
+    padding: 2px 0;
+    list-style: none;
+    li {
+      position: relative;
+      padding: 0 10px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 32px;
+      border-radius: 1px;
+      cursor: pointer;
+      white-space: nowrap;
+      &:hover {
+        background-color: #f2f4f5;
+      }
+    }
+  }
+}
