@@ -1,17 +1,37 @@
 <template>
   <div class="home">
+    <a-button
+      style="margin-bottom: 16px"
+      type="primary"
+      @click="_handleCreate"
+    >
+      新建playbook
+    </a-button>
     <a-table
       rowKey="id"
       :columns="columns"
       :data-source="data"
-    ></a-table>
+      :pagination="false"
+    >
+      <span slot="action" slot-scope="id, name">
+        <a @click="_handleEdit(id, name)">编辑</a>
+      </span>
+    </a-table>
+
+    <Editor ref="editor" />
   </div>
 </template>
 
 <script>
+import Editor from './Editor'
+
 import net from '../lib/api.js'
 
 export default {
+  components: {
+    Editor
+  },
+
   data () {
     return {
       columns: [
@@ -51,6 +71,14 @@ export default {
       } else {
         this.data = data
       }
+    },
+
+    _handleCreate () {
+      this.$refs['editor'].handleCreate()
+    },
+    _handleEdit (id, name) {
+      // 跳转到编辑器
+      this.$refs['editor'].handleEdit(id, name)
     }
   }
 }
